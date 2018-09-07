@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 
 int main()
 {
@@ -14,9 +15,10 @@ int main()
     }
 
     for (int i = 0; i < 12; ++i) {
-        std::cout << "*(ia + " << i << ") = " << *(ia + i) << "  |  ";
-        std::cout << "*((int*)ia + " << i << ") : " << *((int*)ia + i) <<  "  |  ";
-        std::cout << "ia[" << i << "] = " << ia[i] <<  "  |  ";
-        std::cout << "*ia[" << i << "] = " << *ia[i] << '\n';
+        std::cout << "ia + " << std::setw(2) << i << " : " << ia + i << "  |  ";
+        std::cout << "*(ia + " << std::setw(2) << i << ") = " << *(ia + i) << "  |  ";
+        std::cout << "*((int*)ia + " << std::setw(2) << i << ") : " << std::setw(2) << *((int*)ia + i) <<  "  |  ";
+        std::cout << "ia[" << std::setw(2) << i << "] = " << ia[i] <<  "  |  ";
+        std::cout << "*ia[" << std::setw(2) << i << "] = " << *ia[i] << '\n';
     }
 }
