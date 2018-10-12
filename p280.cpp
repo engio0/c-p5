@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-std::string::size_type find_char(const std::string &s, char c,
+std::string::size_type find_char(const std::string &s, const char &c,
                             std::string::size_type &occurs)
 {
     auto ret = s.size();
