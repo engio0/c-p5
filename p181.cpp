@@ -10,7 +10,8 @@ int main()
     for (size_t i = 0; i != rowCnt; ++i) {
         for (size_t j = 0; j !=colCnt; ++j) {
             ia[i][j] = i * colCnt + j;
-            std::cout << "ia[" << i << "][" << j << "] = " << std::setw(2) << i*colCnt + j << "  ";
+            std::cout << "ia[" << i << "][" << j << "]=" << std::setw(2) << i*colCnt + j
+                      << " @" << &ia[i][j] << "  ";
         }
         std::cout << std::endl;
     }
