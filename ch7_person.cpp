@@ -11,3 +11,4 @@ std::ostream &print(std::ostream &os, Person const &item)
 {
     return os << item.name << " " << item.address;
 }
+

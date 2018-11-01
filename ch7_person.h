@@ -9,12 +9,20 @@
 #include <string>
 
 class Person {
+    friend std::istream &read(std::istream &is, Person &item);
+    friend std::ostream &print(std::ostream &os, Person const &item);
+
+    public:
+        Person() = default;
+        Person(std::string n) : name{n} {}
+        Person(std::string n, std::string a) : name{n}, address{a} {}
+        Person(std::istream &is) { read(is, *this); }
+        auto getName() const -> std::string const& { return name; }
+        const std::string& getAddress() const { return address; }
+
     private:
         std::string name;
         std::string address;
-    public:
-        auto get_name() const -> std::string const& { return name; }
-        const std::string& get_address() const { return address; }
 };
 
 std::istream &read(std::istream &is, Person &item);

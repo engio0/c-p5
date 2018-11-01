@@ -2,24 +2,25 @@
 #include <string>
 
 /******************** declarations ********************/
-class Sales_data {
-    friend Sales_data add(const Sales_data&, const Sales_data&);
-    friend std::ostream &print(std::ostream&, const Sales_data&);
-    friend std::istream &read(std::istream&, Sales_data&);
-    public:
-        Sales_data() = default;
-        Sales_data(const std::string &str) : bookNo(str) {}
-        Sales_data(const std::string &str, unsigned num, double price)
-            : bookNo(str), units_sold(num), revenue(num*price) {}
-        Sales_data(std::istream &);
-        std::string const& isbn() const { return bookNo; }
-        Sales_data& combine(const Sales_data&);
-    private:
-        double avg_price() const { return units_sold ? revenue/units_sold : 0; }
-        std::string bookNo;
-        unsigned units_sold = 0;
-        double revenue = 0.0;
+struct Sales_data {
+    Sales_data() = default;
+    Sales_data(const std::string &str) { bookNo = str; }
+    Sales_data(const std::string &str, unsigned num, double price)
+        : bookNo(str), units_sold{num}, revenue(num*price) {}
+    Sales_data(std::istream &is);
+
+    std::string const& isbn() const { return bookNo; }
+    Sales_data& combine(const Sales_data&);
+    double avg_price() const;
+
+    std::string bookNo;
+    unsigned units_sold = 0;
+    double revenue = 0.0;
 };
+
+Sales_data add(const Sales_data&, const Sales_data&);
+std::ostream &print(std::ostream&, const Sales_data&);
+std::istream &read(std::istream&, Sales_data&);
 
 
 /******************** definitions ********************/
@@ -33,6 +34,11 @@ Sales_data& Sales_data::combine(const Sales_data& rhs)
     units_sold += rhs.units_sold;
     revenue += rhs.revenue;
     return *this;
+}
+
+double Sales_data::avg_price() const
+{
+    return (units_sold ? revenue / units_sold : 0.0);
 }
 
 Sales_data add(const Sales_data &lhs, const Sales_data &rhs)
@@ -57,10 +63,12 @@ std::istream &read(std::istream &is, Sales_data &item)
     return is;
 }
 
+
 /******************** main ********************/
 int main()
 {
     Sales_data total;
+
     if (read(std::cin, total)) {
         Sales_data trans;
         while (read(std::cin, trans)) {
