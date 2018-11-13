@@ -16,7 +16,8 @@ class Person {
         Person() = default;
         Person(std::string n) : name{n} {}
         Person(std::string n, std::string a) : name{n}, address{a} {}
-        Person(std::istream &is) { read(is, *this); }
+        explicit Person(std::istream &is) { read(is, *this); }
+
         auto getName() const -> std::string const& { return name; }
         const std::string& getAddress() const { return address; }
 

@@ -7,13 +7,13 @@ class Sales_data {
     friend std::ostream &print(std::ostream&, const Sales_data&);
     friend std::istream &read(std::istream&, Sales_data&);
     public:
-        // Sales_data() = default;
-        // Sales_data(const std::string &str) : bookNo(str) {}
-        // Above two lines into the following one line...
-        Sales_data(const std::string &str = "") : bookNo(str) {}
         Sales_data(const std::string &str, unsigned num, double price)
-            : bookNo(str), units_sold(num), revenue(num*price) {}
-        Sales_data(std::istream &);
+            : bookNo(str), units_sold(num), revenue(num*price) {
+                std::cout << "3 args constructor\n"; }
+        Sales_data(const std::string& str) : Sales_data(str, 0, 0) {
+                std::cout << "1 arg constructor\n"; }
+        Sales_data() : Sales_data("") { std::cout << "no arg constructor\n"; }
+        Sales_data(std::istream &is) : Sales_data() { read(is, *this); }
         std::string const& isbn() const { return bookNo; }
         Sales_data& combine(const Sales_data&);
     private:
@@ -25,11 +25,6 @@ class Sales_data {
 
 
 /******************** definitions ********************/
-Sales_data::Sales_data(std::istream &is)
-{
-    read(is, *this);
-}
-
 Sales_data& Sales_data::combine(const Sales_data& rhs)
 {
     units_sold += rhs.units_sold;
