@@ -39,8 +39,8 @@ int main()
         if (*iter %2) {
             iter = iflist.insert_after(prev, *iter);
             ++iter, ++iter;             // can be replaced with "std::advance(iter, 2);"
-            ++prev, ++prev;             // ++prev++ DOES NOT WORK!!! because iterator++ IS NOT DEFINED
-        } else {
+            ++prev, prev++;             // ++prev++ DOES NOT WORK!!! because post++ operator returns A COPY!!!
+        } else {                        // for the same reason (prev++)++ nor prev++++ does not work!
             iter = iflist.erase_after(prev);
         }
     }
