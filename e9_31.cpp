@@ -41,7 +41,7 @@ int main()
             ++iter, ++iter;             // can be replaced with "std::advance(iter, 2);"
             ++prev, prev++;             // ++prev++ DOES NOT WORK!!! because post++ operator returns A COPY!!!
         } else {                        // for the same reason (prev++)++ nor prev++++ does not work!
-            iter = iflist.erase_after(prev);
+            iter = iflist.erase_after(prev); // however, ++++prev works though because ++pre returns REFERENCE!!!
         }
     }
     std::cout << "finished inserting in iflist\n";
