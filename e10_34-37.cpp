@@ -61,10 +61,12 @@ int main()
     std::cout << "distance from crbegin to crend : " << distance(ilist.crbegin(), ilist.crend()) << std::endl;
     std::cout << "distance from crend to crbegin : " << distance(ilist.crend(), ilist.crbegin()) << std::endl;
 
-    /******************** E10.37 ********************/ 
+    /************************************************/
     ivec = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     ilist.clear();
     ilist.resize(5);
+
+    /******************** E10.37 ********************/ 
     copy(ivec.cbegin() + 2, ivec.cbegin() + 7, ilist.rbegin());
     for (auto i:ilist) std::cout << i << " ";
     std::cout << std::endl;
