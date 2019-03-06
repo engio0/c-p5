@@ -9,6 +9,23 @@
 
 std::map<std::string, std::string> buildMap(std::ifstream &map_file)
 {
+    std::map<std::string, std::string> trans_map;
+    std::string key, value;
+    while (map_file >> key && getline(map_file, value)) {
+        if (value.size() > 1)
+            trans_map[key] = value.substr(1);
+        else
+            throw std::runtime_error("no rule for " + key);
+    }
+    return trans_map;
+}
+
+const std::string &transform(const std::string &word, const std::map<std::string, std::string> &trans_map)
+{
+    auto it = trans_map.find(word);
+    if (it == trans_map.cend())
+        return word;
+    return it->second;
 }
 
 void word_transform(std::ifstream &map_file, std::ifstream &input)
@@ -34,4 +51,16 @@ void word_transform(std::ifstream &map_file, std::ifstream &input)
 
 int main()
 {
+    std::string map_name{"dict-11_33.dat"}, text_name{"text-11_33.dat"};
+    std::ifstream ifs_map(map_name), ifs_text(text_name);
+    if (!ifs_map.good()) {
+        std::cout << "Error : " << map_name << " not exist !!!\n";
+        return 1;
+    }
+    if (!ifs_text.good()) {
+        std::cout << "Error : " << text_name << " not exist !!!\n";
+        return 1;
+    }
+
+    word_transform(ifs_map, ifs_text);
 }
