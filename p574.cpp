@@ -13,14 +13,12 @@ int main()
     std::cout << "auto p2 = new auto(ival); p2 = " << p2 << std::endl;
     std::cout << "*p2 = " << *p2 << std::endl;
 
-    std::cout << "\nAllocating 8 Gigs...\nPress any key to continue...\n";
-    char ch;
-    std::cin >> ch;
-    char *ph = new char[1000000000];
-    if (!ph) {
-        std::cout << "Allocation Failed !!!\n";
-        return 1;
+    for (int i = 1; ; ++i) {
+        std::cout << "\nAllocating 8 Gigs... " << i << "\n";
+        char *ph = new (std::nothrow) char[1000000000];
+        if (!ph) {
+            std::cout << "Allocation Failed !!!\n";
+            return 1;
+        }
     }
-    std::cout << "Allocation Complete !\nPress any key to continue...\n";
-    std::cin >> ch;
 }
