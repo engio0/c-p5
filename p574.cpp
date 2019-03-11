@@ -14,11 +14,16 @@ int main()
     std::cout << "*p2 = " << *p2 << std::endl;
 
     for (int i = 1; ; ++i) {
-        std::cout << "\nAllocating 8 Gigs... " << i << "\n";
+        std::cout << "\nAllocating A Gig... " << i << "\n";
         char *ph = new (std::nothrow) char[1000000000];
         if (!ph) {
-            std::cout << "Allocation Failed !!!\n";
-            return 1;
+            std::cout << "new (nothrow) : Allocation Failed !!!\n";
+            break;
         }
+    }
+    char *ph = new char[1000000000];
+    if (!ph) {
+        std::cout << "new : Allocation Failed !!!\n";
+        return 1;
     }
 }
