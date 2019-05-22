@@ -47,10 +47,10 @@ RM = D:\ProgramFiles\CMake\bin\cmake.exe -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\Dev\projects\sdl\01_hello_SDL
+CMAKE_SOURCE_DIR = D:\Dev\primer\01_hello_SDL
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\Dev\projects\sdl\01_hello_SDL
+CMAKE_BINARY_DIR = D:\Dev\primer\01_hello_SDL
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,9 +79,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\Dev\projects\sdl\01_hello_SDL\CMakeFiles D:\Dev\projects\sdl\01_hello_SDL\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Dev\primer\01_hello_SDL\CMakeFiles D:\Dev\primer\01_hello_SDL\CMakeFiles\progress.marks
 	$(MAKE) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\Dev\projects\sdl\01_hello_SDL\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Dev\primer\01_hello_SDL\CMakeFiles 0
 .PHONY : all
 
 # The main clean target

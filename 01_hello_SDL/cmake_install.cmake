@@ -1,4 +1,4 @@
-# Install script for directory: D:/Dev/projects/sdl/01_hello_SDL
+# Install script for directory: D:/Dev/primer/01_hello_SDL
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/Dev/projects/sdl/01_hello_SDL/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/Dev/primer/01_hello_SDL/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
