@@ -1,0 +1,3 @@
+D:/Dev/primer/02_image/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/02_image/CMakeFiles/edit_cache.dir
+D:/Dev/primer/02_image/CMakeFiles/rebuild_cache.dir
