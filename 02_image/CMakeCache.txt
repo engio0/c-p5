@@ -15,7 +15,7 @@
 ########################
 
 //Path to a program.
-CMAKE_AR:FILEPATH=D:/ProgramFiles/MinGW-W64/mingw64/bin/ar.exe
+CMAKE_AR:FILEPATH=D:/ProgramFiles/mingw-w64/mingw64/bin/ar.exe
 
 //Choose the type of build, options are: None Debug Release RelWithDebInfo
 // MinSizeRel ...
@@ -25,15 +25,15 @@ CMAKE_BUILD_TYPE:STRING=
 CMAKE_COLOR_MAKEFILE:BOOL=ON
 
 //CXX compiler
-CMAKE_CXX_COMPILER:FILEPATH=D:/ProgramFiles/MinGW-W64/mingw64/bin/g++.exe
+CMAKE_CXX_COMPILER:FILEPATH=D:/ProgramFiles/mingw-w64/mingw64/bin/g++.exe
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_CXX_COMPILER_AR:FILEPATH=D:/ProgramFiles/MinGW-W64/mingw64/bin/gcc-ar.exe
+CMAKE_CXX_COMPILER_AR:FILEPATH=D:/ProgramFiles/mingw-w64/mingw64/bin/gcc-ar.exe
 
 //A wrapper around 'ranlib' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_CXX_COMPILER_RANLIB:FILEPATH=D:/ProgramFiles/MinGW-W64/mingw64/bin/gcc-ranlib.exe
+CMAKE_CXX_COMPILER_RANLIB:FILEPATH=D:/ProgramFiles/mingw-w64/mingw64/bin/gcc-ranlib.exe
 
 //Flags used by the CXX compiler during all build types.
 CMAKE_CXX_FLAGS:STRING=
@@ -54,15 +54,15 @@ CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 CMAKE_CXX_STANDARD_LIBRARIES:STRING=-lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
 
 //C compiler
-CMAKE_C_COMPILER:FILEPATH=D:/ProgramFiles/MinGW-W64/mingw64/bin/gcc.exe
+CMAKE_C_COMPILER:FILEPATH=D:/ProgramFiles/mingw-w64/mingw64/bin/gcc.exe
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_C_COMPILER_AR:FILEPATH=D:/ProgramFiles/MinGW-W64/mingw64/bin/gcc-ar.exe
+CMAKE_C_COMPILER_AR:FILEPATH=D:/ProgramFiles/mingw-w64/mingw64/bin/gcc-ar.exe
 
 //A wrapper around 'ranlib' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_C_COMPILER_RANLIB:FILEPATH=D:/ProgramFiles/MinGW-W64/mingw64/bin/gcc-ranlib.exe
+CMAKE_C_COMPILER_RANLIB:FILEPATH=D:/ProgramFiles/mingw-w64/mingw64/bin/gcc-ranlib.exe
 
 //Flags used by the C compiler during all build types.
 CMAKE_C_FLAGS:STRING=
@@ -104,10 +104,10 @@ CMAKE_GNUtoMS:BOOL=OFF
 CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/SDL2Test
 
 //Path to a program.
-CMAKE_LINKER:FILEPATH=D:/ProgramFiles/MinGW-W64/mingw64/bin/ld.exe
+CMAKE_LINKER:FILEPATH=D:/ProgramFiles/mingw-w64/mingw64/bin/ld.exe
 
 //Path to a program.
-CMAKE_MAKE_PROGRAM:FILEPATH=D:/ProgramFiles/MinGW-W64/mingw64/bin/mingw32-make.exe
+CMAKE_MAKE_PROGRAM:FILEPATH=D:/ProgramFiles/mingw-w64/mingw64/bin/mingw32-make.exe
 
 //Flags used by the linker during the creation of modules during
 // all build types.
@@ -130,22 +130,28 @@ CMAKE_MODULE_LINKER_FLAGS_RELEASE:STRING=
 CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //Path to a program.
-CMAKE_NM:FILEPATH=D:/ProgramFiles/MinGW-W64/mingw64/bin/nm.exe
+CMAKE_NM:FILEPATH=D:/ProgramFiles/mingw-w64/mingw64/bin/nm.exe
 
 //Path to a program.
-CMAKE_OBJCOPY:FILEPATH=D:/ProgramFiles/MinGW-W64/mingw64/bin/objcopy.exe
+CMAKE_OBJCOPY:FILEPATH=D:/ProgramFiles/mingw-w64/mingw64/bin/objcopy.exe
 
 //Path to a program.
-CMAKE_OBJDUMP:FILEPATH=D:/ProgramFiles/MinGW-W64/mingw64/bin/objdump.exe
+CMAKE_OBJDUMP:FILEPATH=D:/ProgramFiles/mingw-w64/mingw64/bin/objdump.exe
+
+//Value Computed by CMake
+CMAKE_PROJECT_DESCRIPTION:STATIC=
+
+//Value Computed by CMake
+CMAKE_PROJECT_HOMEPAGE_URL:STATIC=
 
 //Value Computed by CMake
 CMAKE_PROJECT_NAME:STATIC=SDL2Test
 
 //Path to a program.
-CMAKE_RANLIB:FILEPATH=D:/ProgramFiles/MinGW-W64/mingw64/bin/ranlib.exe
+CMAKE_RANLIB:FILEPATH=D:/ProgramFiles/mingw-w64/mingw64/bin/ranlib.exe
 
 //RC compiler
-CMAKE_RC_COMPILER:FILEPATH=D:/ProgramFiles/MinGW-W64/mingw64/bin/windres.exe
+CMAKE_RC_COMPILER:FILEPATH=D:/ProgramFiles/mingw-w64/mingw64/bin/windres.exe
 
 //Flags for Windows Resource Compiler during all build types.
 CMAKE_RC_FLAGS:STRING=
@@ -213,7 +219,7 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE:STRING=
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //Path to a program.
-CMAKE_STRIP:FILEPATH=D:/ProgramFiles/MinGW-W64/mingw64/bin/strip.exe
+CMAKE_STRIP:FILEPATH=D:/ProgramFiles/mingw-w64/mingw64/bin/strip.exe
 
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
@@ -222,10 +228,10 @@ CMAKE_STRIP:FILEPATH=D:/ProgramFiles/MinGW-W64/mingw64/bin/strip.exe
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //mwindows for MinGW
-MINGW32_LIBRARY:STRING=mingw32;-mwindows
+MINGW32_LIBRARY:STRING=mingw32
 
 //Path to a library.
-SDL2MAIN_LIBRARY:FILEPATH=D:/lib/mingw/x86_64-w64-mingw32/lib/libSDL2main.a
+SDL2MAIN_LIBRARY:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a
 
 //Value Computed by CMake
 SDL2Test_BINARY_DIR:STATIC=D:/Dev/primer/02_image
@@ -234,10 +240,10 @@ SDL2Test_BINARY_DIR:STATIC=D:/Dev/primer/02_image
 SDL2Test_SOURCE_DIR:STATIC=D:/Dev/primer/02_image
 
 //Path to a file.
-SDL2_INCLUDE_DIR:PATH=D:/lib/mingw/x86_64-w64-mingw32/include/SDL2
+SDL2_INCLUDE_DIR:PATH=D:/usr/x86_64-w64-mingw32/include/SDL2
 
 //Where the SDL2 Library can be found
-SDL2_LIBRARY:STRING=mingw32;-mwindows;D:/lib/mingw/x86_64-w64-mingw32/lib/libSDL2main.a;C:/Windows/System32/SDL2.dll
+SDL2_LIBRARY:STRING=mingw32;D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a;C:/Windows/System32/SDL2.dll
 
 
 ########################
@@ -251,9 +257,9 @@ CMAKE_CACHEFILE_DIR:INTERNAL=d:/Dev/primer/02_image
 //Major version of cmake used to create the current loaded cache
 CMAKE_CACHE_MAJOR_VERSION:INTERNAL=3
 //Minor version of cmake used to create the current loaded cache
-CMAKE_CACHE_MINOR_VERSION:INTERNAL=11
+CMAKE_CACHE_MINOR_VERSION:INTERNAL=14
 //Patch version of cmake used to create the current loaded cache
-CMAKE_CACHE_PATCH_VERSION:INTERNAL=1
+CMAKE_CACHE_PATCH_VERSION:INTERNAL=4
 //ADVANCED property for variable: CMAKE_COLOR_MAKEFILE
 CMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1
 //Path to CMake executable.
@@ -369,7 +375,7 @@ CMAKE_RC_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_RC_FLAGS_RELWITHDEBINFO
 CMAKE_RC_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //Path to CMake installation.
-CMAKE_ROOT:INTERNAL=D:/ProgramFiles/CMake/share/cmake-3.11
+CMAKE_ROOT:INTERNAL=D:/ProgramFiles/CMake/share/cmake-3.14
 //ADVANCED property for variable: CMAKE_SH
 CMAKE_SH-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS
@@ -401,8 +407,8 @@ CMAKE_STRIP-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
 CMAKE_VERBOSE_MAKEFILE-ADVANCED:INTERNAL=1
 //Details about finding SDL2
-FIND_PACKAGE_MESSAGE_DETAILS_SDL2:INTERNAL=[mingw32;-mwindows;D:/lib/mingw/x86_64-w64-mingw32/lib/libSDL2main.a;C:/Windows/System32/SDL2.dll][D:/lib/mingw/x86_64-w64-mingw32/include/SDL2][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_SDL2:INTERNAL=[mingw32;D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a;C:/Windows/System32/SDL2.dll][D:/usr/x86_64-w64-mingw32/include/SDL2][v()]
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
-SDL2_LIBRARY_TEMP:INTERNAL=mingw32;-mwindows;D:/lib/mingw/x86_64-w64-mingw32/lib/libSDL2main.a;C:/Windows/System32/SDL2.dll
+SDL2_LIBRARY_TEMP:INTERNAL=mingw32;D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a;C:/Windows/System32/SDL2.dll
 
