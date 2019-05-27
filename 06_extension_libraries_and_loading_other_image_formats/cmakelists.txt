@@ -9,4 +9,4 @@ include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR})
 
 add_executable(SDL2Test ./06_extension_libraries_and_loading_other_image_formats.cpp)
 
-target_link_libraries(SDL2Test ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBARRY})
+target_link_libraries(SDL2Test ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBARARIES})
