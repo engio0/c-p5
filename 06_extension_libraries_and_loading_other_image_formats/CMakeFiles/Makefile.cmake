@@ -101,6 +101,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "D:/ProgramFiles/CMake/share/cmake-3.11/Modules/FindPackageHandleStandardArgs.cmake"
   "D:/ProgramFiles/CMake/share/cmake-3.11/Modules/FindPackageMessage.cmake"
   "D:/ProgramFiles/CMake/share/cmake-3.11/Modules/FindSDL2.cmake"
+  "D:/ProgramFiles/CMake/share/cmake-3.11/Modules/FindSDL2_image.cmake"
   "D:/ProgramFiles/CMake/share/cmake-3.11/Modules/FindThreads.cmake"
   "D:/ProgramFiles/CMake/share/cmake-3.11/Modules/Internal/FeatureTesting.cmake"
   "D:/ProgramFiles/CMake/share/cmake-3.11/Modules/Platform/Windows-Determine-CXX.cmake"

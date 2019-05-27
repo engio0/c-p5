@@ -53,7 +53,15 @@ SDL_Surface *loadSurface(std::string path)
         snprintf(gBuffer, 80, "Unable to load image %s! SDL error: %s\n", path.c_str(), SDL_GetError());
         MessageBox(NULL, gBuffer, "Error", MB_OK);
     }
-    return loadedSurface;
+
+    SDL_Surface *optimizedSurface = SDL_ConvertSurface(loadedSurface, gScreenSurface->format, 0);
+    if (optimizedSurface == NULL) {
+        snprintf(gBuffer, 80, "Unable to optimize image %s! SDL error: %s", path.c_str(), SDL_GetError());
+        MessageBox(NULL, gBuffer, "Error", MB_OK);
+    }
+    SDL_FreeSurface(loadedSurface);
+
+    return optimizedSurface;
 }
 
 bool loadMedia()
@@ -145,7 +153,7 @@ int main(int argc, char *args[])
                 }
             }
         }
-        SDL_BlitSurface(gCurrentSurface, NULL, gScreenSurface, NULL);
+        SDL_BlitScaled(gCurrentSurface, NULL, gScreenSurface, NULL);
         SDL_UpdateWindowSurface(gWindow);
     }
 

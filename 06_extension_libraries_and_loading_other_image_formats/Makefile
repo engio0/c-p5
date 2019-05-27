@@ -47,10 +47,10 @@ RM = D:\ProgramFiles\CMake\bin\cmake.exe -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\Dev\primer\05_optimized_surface_loading_and_soft_stretching
+CMAKE_SOURCE_DIR = D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\Dev\primer\05_optimized_surface_loading_and_soft_stretching
+CMAKE_BINARY_DIR = D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,9 +79,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\Dev\primer\05_optimized_surface_loading_and_soft_stretching\CMakeFiles D:\Dev\primer\05_optimized_surface_loading_and_soft_stretching\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats\CMakeFiles D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats\CMakeFiles\progress.marks
 	$(MAKE) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\Dev\primer\05_optimized_surface_loading_and_soft_stretching\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -122,32 +122,32 @@ SDL2Test/fast:
 	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/build
 .PHONY : SDL2Test/fast
 
-05_stretch.obj: 05_stretch.cpp.obj
+06_extension_libraries_and_loading_other_image_formats.obj: 06_extension_libraries_and_loading_other_image_formats.cpp.obj
 
-.PHONY : 05_stretch.obj
+.PHONY : 06_extension_libraries_and_loading_other_image_formats.obj
 
 # target to build an object file
-05_stretch.cpp.obj:
-	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/05_stretch.cpp.obj
-.PHONY : 05_stretch.cpp.obj
+06_extension_libraries_and_loading_other_image_formats.cpp.obj:
+	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/06_extension_libraries_and_loading_other_image_formats.cpp.obj
+.PHONY : 06_extension_libraries_and_loading_other_image_formats.cpp.obj
 
-05_stretch.i: 05_stretch.cpp.i
+06_extension_libraries_and_loading_other_image_formats.i: 06_extension_libraries_and_loading_other_image_formats.cpp.i
 
-.PHONY : 05_stretch.i
+.PHONY : 06_extension_libraries_and_loading_other_image_formats.i
 
 # target to preprocess a source file
-05_stretch.cpp.i:
-	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/05_stretch.cpp.i
-.PHONY : 05_stretch.cpp.i
+06_extension_libraries_and_loading_other_image_formats.cpp.i:
+	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/06_extension_libraries_and_loading_other_image_formats.cpp.i
+.PHONY : 06_extension_libraries_and_loading_other_image_formats.cpp.i
 
-05_stretch.s: 05_stretch.cpp.s
+06_extension_libraries_and_loading_other_image_formats.s: 06_extension_libraries_and_loading_other_image_formats.cpp.s
 
-.PHONY : 05_stretch.s
+.PHONY : 06_extension_libraries_and_loading_other_image_formats.s
 
 # target to generate assembly for a file
-05_stretch.cpp.s:
-	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/05_stretch.cpp.s
-.PHONY : 05_stretch.cpp.s
+06_extension_libraries_and_loading_other_image_formats.cpp.s:
+	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/06_extension_libraries_and_loading_other_image_formats.cpp.s
+.PHONY : 06_extension_libraries_and_loading_other_image_formats.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... SDL2Test
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... 05_stretch.obj
-	@echo ... 05_stretch.i
-	@echo ... 05_stretch.s
+	@echo ... 06_extension_libraries_and_loading_other_image_formats.obj
+	@echo ... 06_extension_libraries_and_loading_other_image_formats.i
+	@echo ... 06_extension_libraries_and_loading_other_image_formats.s
 .PHONY : help
 
 
