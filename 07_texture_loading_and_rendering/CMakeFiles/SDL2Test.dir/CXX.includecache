@@ -6,14 +6,12 @@
 
 #IncludeRegexTransform: 
 
-D:/Dev/primer/06_extension_libraries_and_loading_other_image_formats/06_extension.cpp
+D:/Dev/primer/07_texture_loading_and_rendering/07_texture.cpp
 SDL.h
 -
 SDL_image.h
 -
 windows.h
--
-cstdio
 -
 string
 -

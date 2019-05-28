@@ -1,5 +1,5 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/SDL2Test.dir/06_extension.cpp.obj"
+  "CMakeFiles/SDL2Test.dir/07_texture.cpp.obj"
   "SDL2Test.pdb"
   "SDL2Test.exe"
   "SDL2Test.exe.manifest"

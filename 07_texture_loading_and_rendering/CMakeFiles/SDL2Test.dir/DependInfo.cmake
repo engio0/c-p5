@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "D:/Dev/primer/06_extension_libraries_and_loading_other_image_formats/06_extension.cpp" "D:/Dev/primer/06_extension_libraries_and_loading_other_image_formats/CMakeFiles/SDL2Test.dir/06_extension.cpp.obj"
+  "D:/Dev/primer/07_texture_loading_and_rendering/07_texture.cpp" "D:/Dev/primer/07_texture_loading_and_rendering/CMakeFiles/SDL2Test.dir/07_texture.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

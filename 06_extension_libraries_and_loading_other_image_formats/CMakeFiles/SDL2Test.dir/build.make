@@ -56,31 +56,32 @@ include CMakeFiles/SDL2Test.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/SDL2Test.dir/flags.make
 
-CMakeFiles/SDL2Test.dir/06_extension_libraries_and_loading_other_image_formats.cpp.obj: CMakeFiles/SDL2Test.dir/flags.make
-CMakeFiles/SDL2Test.dir/06_extension_libraries_and_loading_other_image_formats.cpp.obj: CMakeFiles/SDL2Test.dir/includes_CXX.rsp
-CMakeFiles/SDL2Test.dir/06_extension_libraries_and_loading_other_image_formats.cpp.obj: 06_extension_libraries_and_loading_other_image_formats.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SDL2Test.dir/06_extension_libraries_and_loading_other_image_formats.cpp.obj"
-	D:\ProgramFiles\MinGW-W64\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\SDL2Test.dir\06_extension_libraries_and_loading_other_image_formats.cpp.obj -c D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats\06_extension_libraries_and_loading_other_image_formats.cpp
+CMakeFiles/SDL2Test.dir/06_extension.cpp.obj: CMakeFiles/SDL2Test.dir/flags.make
+CMakeFiles/SDL2Test.dir/06_extension.cpp.obj: CMakeFiles/SDL2Test.dir/includes_CXX.rsp
+CMakeFiles/SDL2Test.dir/06_extension.cpp.obj: 06_extension.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SDL2Test.dir/06_extension.cpp.obj"
+	D:\ProgramFiles\MinGW-W64\mingw64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\SDL2Test.dir\06_extension.cpp.obj -c D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats\06_extension.cpp
 
-CMakeFiles/SDL2Test.dir/06_extension_libraries_and_loading_other_image_formats.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2Test.dir/06_extension_libraries_and_loading_other_image_formats.cpp.i"
-	D:\ProgramFiles\MinGW-W64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats\06_extension_libraries_and_loading_other_image_formats.cpp > CMakeFiles\SDL2Test.dir\06_extension_libraries_and_loading_other_image_formats.cpp.i
+CMakeFiles/SDL2Test.dir/06_extension.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SDL2Test.dir/06_extension.cpp.i"
+	D:\ProgramFiles\MinGW-W64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats\06_extension.cpp > CMakeFiles\SDL2Test.dir\06_extension.cpp.i
 
-CMakeFiles/SDL2Test.dir/06_extension_libraries_and_loading_other_image_formats.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2Test.dir/06_extension_libraries_and_loading_other_image_formats.cpp.s"
-	D:\ProgramFiles\MinGW-W64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats\06_extension_libraries_and_loading_other_image_formats.cpp -o CMakeFiles\SDL2Test.dir\06_extension_libraries_and_loading_other_image_formats.cpp.s
+CMakeFiles/SDL2Test.dir/06_extension.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SDL2Test.dir/06_extension.cpp.s"
+	D:\ProgramFiles\MinGW-W64\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats\06_extension.cpp -o CMakeFiles\SDL2Test.dir\06_extension.cpp.s
 
 # Object files for target SDL2Test
 SDL2Test_OBJECTS = \
-"CMakeFiles/SDL2Test.dir/06_extension_libraries_and_loading_other_image_formats.cpp.obj"
+"CMakeFiles/SDL2Test.dir/06_extension.cpp.obj"
 
 # External object files for target SDL2Test
 SDL2Test_EXTERNAL_OBJECTS =
 
-SDL2Test.exe: CMakeFiles/SDL2Test.dir/06_extension_libraries_and_loading_other_image_formats.cpp.obj
+SDL2Test.exe: CMakeFiles/SDL2Test.dir/06_extension.cpp.obj
 SDL2Test.exe: CMakeFiles/SDL2Test.dir/build.make
 SDL2Test.exe: D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a
 SDL2Test.exe: C:/Windows/System32/SDL2.dll
+SDL2Test.exe: C:/Windows/System32/SDL2_image.dll
 SDL2Test.exe: CMakeFiles/SDL2Test.dir/linklibs.rsp
 SDL2Test.exe: CMakeFiles/SDL2Test.dir/objects1.rsp
 SDL2Test.exe: CMakeFiles/SDL2Test.dir/link.txt

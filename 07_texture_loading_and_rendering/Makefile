@@ -47,10 +47,10 @@ RM = D:\ProgramFiles\CMake\bin\cmake.exe -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats
+CMAKE_SOURCE_DIR = D:\Dev\primer\07_texture_loading_and_rendering
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats
+CMAKE_BINARY_DIR = D:\Dev\primer\07_texture_loading_and_rendering
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,9 +79,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats\CMakeFiles D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Dev\primer\07_texture_loading_and_rendering\CMakeFiles D:\Dev\primer\07_texture_loading_and_rendering\CMakeFiles\progress.marks
 	$(MAKE) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\Dev\primer\06_extension_libraries_and_loading_other_image_formats\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Dev\primer\07_texture_loading_and_rendering\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -122,32 +122,32 @@ SDL2Test/fast:
 	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/build
 .PHONY : SDL2Test/fast
 
-06_extension.obj: 06_extension.cpp.obj
+07_texture.obj: 07_texture.cpp.obj
 
-.PHONY : 06_extension.obj
+.PHONY : 07_texture.obj
 
 # target to build an object file
-06_extension.cpp.obj:
-	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/06_extension.cpp.obj
-.PHONY : 06_extension.cpp.obj
+07_texture.cpp.obj:
+	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/07_texture.cpp.obj
+.PHONY : 07_texture.cpp.obj
 
-06_extension.i: 06_extension.cpp.i
+07_texture.i: 07_texture.cpp.i
 
-.PHONY : 06_extension.i
+.PHONY : 07_texture.i
 
 # target to preprocess a source file
-06_extension.cpp.i:
-	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/06_extension.cpp.i
-.PHONY : 06_extension.cpp.i
+07_texture.cpp.i:
+	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/07_texture.cpp.i
+.PHONY : 07_texture.cpp.i
 
-06_extension.s: 06_extension.cpp.s
+07_texture.s: 07_texture.cpp.s
 
-.PHONY : 06_extension.s
+.PHONY : 07_texture.s
 
 # target to generate assembly for a file
-06_extension.cpp.s:
-	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/06_extension.cpp.s
-.PHONY : 06_extension.cpp.s
+07_texture.cpp.s:
+	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/07_texture.cpp.s
+.PHONY : 07_texture.cpp.s
 
 # Help Target
 help:
@@ -158,9 +158,9 @@ help:
 	@echo ... SDL2Test
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... 06_extension.obj
-	@echo ... 06_extension.i
-	@echo ... 06_extension.s
+	@echo ... 07_texture.obj
+	@echo ... 07_texture.i
+	@echo ... 07_texture.s
 .PHONY : help
 
 
