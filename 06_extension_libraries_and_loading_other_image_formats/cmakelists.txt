@@ -2,6 +2,17 @@ cmake_minimum_required(VERSION 3.8)
 
 set(SDL2_PATH "D:/usr/x86_64-w64-mingw32")
 set(SDL2_IMAGE_PATH "D:/usr/x86_64-w64-mingw32")
+<<<<<<< HEAD
+
+find_package(SDL2 REQUIRED)
+find_package(SDL2_IMAGE REQUIRED)
+
+include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR})
+
+add_executable(SDLTest ./06_extension_libraries_and_loading_other_image_formats.cpp)
+
+target_link_libraries(SDLTest ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES})
+=======
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 
@@ -9,4 +20,9 @@ include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR})
 
 add_executable(SDL2Test ./06_extension.cpp)
 
+<<<<<<< HEAD
 target_link_libraries(SDL2Test ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARIES})
+=======
+target_link_libraries(SDL2Test ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBARARIES})
+>>>>>>> 34b0ecdb8fbaa3b384b2f25bb1bc69ac4581dc5b
+>>>>>>> 201c9115538d46cdabd5525a2baca4010ea0caa9

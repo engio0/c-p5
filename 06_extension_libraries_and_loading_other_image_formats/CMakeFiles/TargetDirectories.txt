@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+D:/Dev/primer/06_extension_libraries_and_loading_other_image_formats/CMakeFiles/SDLTest.dir
+=======
 D:/Dev/primer/06_extension_libraries_and_loading_other_image_formats/CMakeFiles/SDL2Test.dir
+>>>>>>> 34b0ecdb8fbaa3b384b2f25bb1bc69ac4581dc5b
 D:/Dev/primer/06_extension_libraries_and_loading_other_image_formats/CMakeFiles/edit_cache.dir
 D:/Dev/primer/06_extension_libraries_and_loading_other_image_formats/CMakeFiles/rebuild_cache.dir

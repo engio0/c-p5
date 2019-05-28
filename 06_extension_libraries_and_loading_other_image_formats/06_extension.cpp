@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <windows.h>
+<<<<<<< HEAD
 #include <cstdio>
 #include <string>
 
@@ -67,3 +68,8 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+=======
+#include <string>
+#include <cstdio>
+
+>>>>>>> 201c9115538d46cdabd5525a2baca4010ea0caa9
