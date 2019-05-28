@@ -46,38 +46,8 @@ bool init()
 }
 
 
-SDL_Texture *loadTexture(std::string path)
-{
-    char szBuffer[81];
-    SDL_Texture *newTexture = NULL;
-
-    SDL_Surface *loadedSurface = IMG_Load(path.c_str());
-    if (!loadedSurface) {
-        wsprintf(szBuffer, "IMG_Load failed! SDL_image Error: %s", IMG_GetError());
-        MessageBox(NULL, szBuffer, "Error", MB_OK);
-    }
-
-    newTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
-    if (!newTexture) {
-        wsprintf(szBuffer, "SDL_CreateTextureFromSurface failed! SDL Error: %s", SDL_GetError());
-        MessageBox(NULL, szBuffer, "Error", MB_OK);
-    }
-
-    SDL_FreeSurface(loadedSurface);
-
-    return newTexture;
-}
-
-
 bool loadMedia()
 {
-    char szBuffer[81];
-
-    gTexture = loadTexture("texture.png");
-    if (!gTexture) {
-        wsprintf(szBuffer, "loadTexture failed!", "Error", MB_OK);
-        return false;
-    }
     return true;
 }
 
@@ -111,15 +81,40 @@ int main(int argc, char *argv[])
     }
 
     while (!quit) {
-        while (!SDL_PollEvent(&e)) {
+        while (SDL_PollEvent(&e)) {
             if (e.type == SDL_QUIT) {
                 quit = true;
             }
+
+            if (e.type == SDL_KEYDOWN) {
+                switch (e.key.keysym.sym) {
+                    case SDLK_UP:
+                        break;
+                    case SDLK_DOWN:
+                        break;
+                    case SDLK_LEFT:
+                        break;
+                    case SDLK_RIGHT:
+                        break;
+                    case SDLK_q:
+                        quit = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
+        SDL_SetRenderDrawColor(gRenderer, 0xff, 0xff, 0xff, 0xff);
         SDL_RenderClear(gRenderer);
 
-        SDL_RenderCopy(gRenderer, gTexture, NULL, NULL);
+        SDL_Rect fillRect = { SCREEN_WIDTH/4, SCREEN_HEIGHT/4, SCREEN_WIDTH/2, SCREEN_HEIGHT/2 };
+        SDL_SetRenderDrawColor(gRenderer, 0xff, 0x00, 0x00, 0xff);
+        SDL_RenderFillRect(gRenderer, &fillRect);
+
+        SDL_Rect outlineRect = { SCREEN_WIDTH/6, SCREEN_HEIGHT/6, SCREEN_WIDTH*2/3, SCREEN_HEIGHT*2/3 };
+        SDL_SetRenderDrawColor(gRenderer, 0x00, 0xff, 0x00, 0xff);
+        SDL_RenderDrawRect(gRenderer, &outlineRect);
 
         SDL_RenderPresent(gRenderer);
     }
