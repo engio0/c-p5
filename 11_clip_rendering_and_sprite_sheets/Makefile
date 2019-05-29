@@ -47,10 +47,10 @@ RM = D:\ProgramFiles\CMake\bin\cmake.exe -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\Dev\primer\10_color_keying
+CMAKE_SOURCE_DIR = D:\Dev\primer\11_clip_rendering_and_sprite_sheets
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\Dev\primer\10_color_keying
+CMAKE_BINARY_DIR = D:\Dev\primer\11_clip_rendering_and_sprite_sheets
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -79,9 +79,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\Dev\primer\10_color_keying\CMakeFiles D:\Dev\primer\10_color_keying\CMakeFiles\progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Dev\primer\11_clip_rendering_and_sprite_sheets\CMakeFiles D:\Dev\primer\11_clip_rendering_and_sprite_sheets\CMakeFiles\progress.marks
 	$(MAKE) -f CMakeFiles\Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\Dev\primer\10_color_keying\CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\Dev\primer\11_clip_rendering_and_sprite_sheets\CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -135,59 +135,59 @@ SDL2Tutorial/fast:
 	$(MAKE) -f CMakeFiles\SDL2Tutorial.dir\build.make CMakeFiles/SDL2Tutorial.dir/build
 .PHONY : SDL2Tutorial/fast
 
-10_color_keying.obj: 10_color_keying.cpp.obj
+11_clip_rendering_and_sprite_sheets.obj: 11_clip_rendering_and_sprite_sheets.cpp.obj
 
-.PHONY : 10_color_keying.obj
-
-# target to build an object file
-10_color_keying.cpp.obj:
-	$(MAKE) -f CMakeFiles\SDL2Tutorial.dir\build.make CMakeFiles/SDL2Tutorial.dir/10_color_keying.cpp.obj
-.PHONY : 10_color_keying.cpp.obj
-
-10_color_keying.i: 10_color_keying.cpp.i
-
-.PHONY : 10_color_keying.i
-
-# target to preprocess a source file
-10_color_keying.cpp.i:
-	$(MAKE) -f CMakeFiles\SDL2Tutorial.dir\build.make CMakeFiles/SDL2Tutorial.dir/10_color_keying.cpp.i
-.PHONY : 10_color_keying.cpp.i
-
-10_color_keying.s: 10_color_keying.cpp.s
-
-.PHONY : 10_color_keying.s
-
-# target to generate assembly for a file
-10_color_keying.cpp.s:
-	$(MAKE) -f CMakeFiles\SDL2Tutorial.dir\build.make CMakeFiles/SDL2Tutorial.dir/10_color_keying.cpp.s
-.PHONY : 10_color_keying.cpp.s
-
-color_keying.obj: color_keying.cpp.obj
-
-.PHONY : color_keying.obj
+.PHONY : 11_clip_rendering_and_sprite_sheets.obj
 
 # target to build an object file
-color_keying.cpp.obj:
-	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/color_keying.cpp.obj
-.PHONY : color_keying.cpp.obj
+11_clip_rendering_and_sprite_sheets.cpp.obj:
+	$(MAKE) -f CMakeFiles\SDL2Tutorial.dir\build.make CMakeFiles/SDL2Tutorial.dir/11_clip_rendering_and_sprite_sheets.cpp.obj
+.PHONY : 11_clip_rendering_and_sprite_sheets.cpp.obj
 
-color_keying.i: color_keying.cpp.i
+11_clip_rendering_and_sprite_sheets.i: 11_clip_rendering_and_sprite_sheets.cpp.i
 
-.PHONY : color_keying.i
+.PHONY : 11_clip_rendering_and_sprite_sheets.i
 
 # target to preprocess a source file
-color_keying.cpp.i:
-	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/color_keying.cpp.i
-.PHONY : color_keying.cpp.i
+11_clip_rendering_and_sprite_sheets.cpp.i:
+	$(MAKE) -f CMakeFiles\SDL2Tutorial.dir\build.make CMakeFiles/SDL2Tutorial.dir/11_clip_rendering_and_sprite_sheets.cpp.i
+.PHONY : 11_clip_rendering_and_sprite_sheets.cpp.i
 
-color_keying.s: color_keying.cpp.s
+11_clip_rendering_and_sprite_sheets.s: 11_clip_rendering_and_sprite_sheets.cpp.s
 
-.PHONY : color_keying.s
+.PHONY : 11_clip_rendering_and_sprite_sheets.s
 
 # target to generate assembly for a file
-color_keying.cpp.s:
-	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/color_keying.cpp.s
-.PHONY : color_keying.cpp.s
+11_clip_rendering_and_sprite_sheets.cpp.s:
+	$(MAKE) -f CMakeFiles\SDL2Tutorial.dir\build.make CMakeFiles/SDL2Tutorial.dir/11_clip_rendering_and_sprite_sheets.cpp.s
+.PHONY : 11_clip_rendering_and_sprite_sheets.cpp.s
+
+clip_render.obj: clip_render.cpp.obj
+
+.PHONY : clip_render.obj
+
+# target to build an object file
+clip_render.cpp.obj:
+	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/clip_render.cpp.obj
+.PHONY : clip_render.cpp.obj
+
+clip_render.i: clip_render.cpp.i
+
+.PHONY : clip_render.i
+
+# target to preprocess a source file
+clip_render.cpp.i:
+	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/clip_render.cpp.i
+.PHONY : clip_render.cpp.i
+
+clip_render.s: clip_render.cpp.s
+
+.PHONY : clip_render.s
+
+# target to generate assembly for a file
+clip_render.cpp.s:
+	$(MAKE) -f CMakeFiles\SDL2Test.dir\build.make CMakeFiles/SDL2Test.dir/clip_render.cpp.s
+.PHONY : clip_render.cpp.s
 
 # Help Target
 help:
@@ -199,12 +199,12 @@ help:
 	@echo ... SDL2Tutorial
 	@echo ... edit_cache
 	@echo ... rebuild_cache
-	@echo ... 10_color_keying.obj
-	@echo ... 10_color_keying.i
-	@echo ... 10_color_keying.s
-	@echo ... color_keying.obj
-	@echo ... color_keying.i
-	@echo ... color_keying.s
+	@echo ... 11_clip_rendering_and_sprite_sheets.obj
+	@echo ... 11_clip_rendering_and_sprite_sheets.i
+	@echo ... 11_clip_rendering_and_sprite_sheets.s
+	@echo ... clip_render.obj
+	@echo ... clip_render.i
+	@echo ... clip_render.s
 .PHONY : help
 
 

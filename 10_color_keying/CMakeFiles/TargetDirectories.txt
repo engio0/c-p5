@@ -1,3 +1,4 @@
 D:/Dev/primer/10_color_keying/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/10_color_keying/CMakeFiles/SDL2Tutorial.dir
 D:/Dev/primer/10_color_keying/CMakeFiles/edit_cache.dir
 D:/Dev/primer/10_color_keying/CMakeFiles/rebuild_cache.dir

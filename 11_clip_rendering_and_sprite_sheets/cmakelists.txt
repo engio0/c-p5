@@ -8,8 +8,8 @@ find_package(SDL2_image REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR})
 
-add_executable(SDL2Test ./color_keying.cpp)
-add_executable(SDL2Tutorial ./10_color_keying.cpp)
+add_executable(SDL2Test ./clip_render.cpp)
+add_executable(SDL2Tutorial ./11_clip_rendering_and_sprite_sheets.cpp)
 
 target_link_libraries(SDL2Test ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY})
 target_link_libraries(SDL2Tutorial ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY})
