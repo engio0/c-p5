@@ -105,14 +105,19 @@ int main(int argc, char *argv[])
             }
         }
 
+        SDL_RenderSetViewport(gRenderer, NULL);
+
         // Clear screen
-        SDL_SetRenderDrawColor(gRenderer, 0xff, 0xff, 0xff, 0xff);
+        SDL_SetRenderDrawColor(gRenderer, 0x66, 0x66, 0x66, 0x66);
         SDL_RenderClear(gRenderer);
 
         // Render red filled rectangle
         SDL_Rect fillRect = { SCREEN_WIDTH/4, SCREEN_HEIGHT/4, SCREEN_WIDTH/2, SCREEN_HEIGHT/2 };
         SDL_SetRenderDrawColor(gRenderer, 0xff, 0x00, 0x00, 0xff);
         SDL_RenderFillRect(gRenderer, &fillRect);
+
+        SDL_Rect clip = {100, 50, 400, 300};
+        SDL_RenderSetViewport(gRenderer, &clip);
 
         // Render green outlined rectangle
         SDL_Rect outlineRect = { SCREEN_WIDTH/6, SCREEN_HEIGHT/6, SCREEN_WIDTH*2/3, SCREEN_HEIGHT*2/3 };

@@ -1,0 +1,4 @@
+D:/Dev/primer/09_the_viewport/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/09_the_viewport/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/09_the_viewport/CMakeFiles/edit_cache.dir
+D:/Dev/primer/09_the_viewport/CMakeFiles/rebuild_cache.dir
