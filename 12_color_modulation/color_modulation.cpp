@@ -73,3 +73,8 @@ void LTexture::setColor(Uint8 red, Uint8 green, Uint8 blue)
 {
     SDL_SetTextureColorMod(mTexture, red, green, blue);
 }
+
+int main(int, char*[])
+{
+    return 0;
+}
