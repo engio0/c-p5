@@ -17,6 +17,8 @@ class LTexture
         void free();
         bool loadFromFile(std::string path);
         void setColor(Uint8 red, Uint8 green, Uint8 blue);
+        void setBlendMode(SDL_BlendMode blending);
+        void setAlpha(Uint8 alpha);
         void render(int x, int y, SDL_Rect* clip = NULL);
         int getWidth() { return mWidth; };
         int getHeight() {return mHeight; };
@@ -76,6 +78,16 @@ void LTexture::setColor(Uint8 red, Uint8 green, Uint8 blue)
     SDL_SetTextureColorMod(mTexture, red, green, blue);
 }
 
+void LTexture::setBlendMode(SDL_BlendMode blending)
+{
+    SDL_SetTextureBlendMode(mTexture, blending);
+}
+
+void LTexture::setAlpha(Uint8 alpha)
+{
+    SDL_SetTextureAlphaMod(mTexture, alpha);
+}
+
 void LTexture::render(int x, int y, SDL_Rect* clip)
 {
     SDL_Rect renderQuad = {x, y, mWidth, mHeight};
@@ -108,12 +120,15 @@ int main(int, char*[])
     SDL_RenderFillRect(gRenderer, &rectFill);
     */
 
-    LTexture txtColors;
-    txtColors.loadFromFile("colors.png");
+    LTexture modulatedTexture, backgroundTexture;
+    modulatedTexture.loadFromFile("./fadeout.png");
+    backgroundTexture.loadFromFile("./fadein.png");
+    modulatedTexture.setBlendMode(SDL_BLENDMODE_BLEND);
 
     Uint8 r = 255;
     Uint8 g = 255;
     Uint8 b = 255;
+    Uint8 a = 255;
 
     bool quit = false;
     SDL_Event evt;
@@ -149,13 +164,22 @@ int main(int, char*[])
                     case SDLK_a:
                         r = g = b = 255;
                         break;
+                    case SDLK_t:
+                        (a + 32 > 255) ? a = 255 : a += 32;
+                        break;
+                    case SDLK_g:
+                        (a - 32 < 0) ? a = 0 : a -= 32;
+                        break;
                     default:
                         break;
                 }
             }
         }
-        txtColors.setColor(r, g, b);
-        txtColors.render(0, 0);
+//        txtColors.setColor(r, g, b);
+//        txtColors.render(0, 0);
+        backgroundTexture.render(0, 0);
+        modulatedTexture.setAlpha(a);
+        modulatedTexture.render(0, 0);
         SDL_RenderPresent(gRenderer);
     }
     SDL_DestroyRenderer(gRenderer);

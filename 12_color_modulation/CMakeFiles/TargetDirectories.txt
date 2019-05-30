@@ -1,0 +1,4 @@
+D:/Dev/primer/12_color_modulation/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/12_color_modulation/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/12_color_modulation/CMakeFiles/edit_cache.dir
+D:/Dev/primer/12_color_modulation/CMakeFiles/rebuild_cache.dir

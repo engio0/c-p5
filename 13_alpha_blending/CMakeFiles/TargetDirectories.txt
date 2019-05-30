@@ -1,0 +1,4 @@
+D:/Dev/primer/13_alpha_blending/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/13_alpha_blending/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/13_alpha_blending/CMakeFiles/edit_cache.dir
+D:/Dev/primer/13_alpha_blending/CMakeFiles/rebuild_cache.dir
