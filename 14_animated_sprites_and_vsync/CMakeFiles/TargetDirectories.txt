@@ -1,0 +1,4 @@
+D:/Dev/primer/14_animated_sprites_and_vsync/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/14_animated_sprites_and_vsync/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/14_animated_sprites_and_vsync/CMakeFiles/edit_cache.dir
+D:/Dev/primer/14_animated_sprites_and_vsync/CMakeFiles/rebuild_cache.dir
