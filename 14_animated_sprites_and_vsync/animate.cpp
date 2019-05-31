@@ -30,6 +30,43 @@ int main(int, char*[])
         SDL_FreeSurface(tmpSurface);
     }
 
+    for (int i = 0; i < 4; ++i) {
+        hSpriteClips[i].x = 64 * i;
+        hSpriteClips[i].y = 0;
+        hSpriteClips[i].w = 64;
+        hSpriteClips[i].h = 206;
+    }
+
+    SDL_Event evt;
+    bool quit = false;
+    int frame = 0;
+    SDL_Rect* currentClip;
+    while (!quit) {
+        while (SDL_PollEvent(&evt)) {
+            switch (evt.type) {
+                case SDL_QUIT:
+                    quit = true;
+                    break;
+                case SDL_KEYDOWN:
+                    switch (evt.key.keysym.sym) {
+                        case SDLK_q:
+                            quit = true;
+                            break;
+                        default:
+                            break;
+                    }
+            }
+        }
+        currentClip = &hSpriteClips[frame / 4];
+        SDL_RenderCopy(hRenderer, hSpriteSheetTexture, currentClip, NULL);
+        SDL_RenderPresent(hRenderer);
+
+        ++frame;
+        if ((frame/4) >= WALKING_ANIMATION_FRAMES) {
+            frame = 0;
+        }
+    }
+
     SDL_DestroyTexture(hSpriteSheetTexture);
     SDL_DestroyRenderer(hRenderer);
     SDL_DestroyWindow(hWindow);
