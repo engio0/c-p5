@@ -1,0 +1,4 @@
+D:/Dev/primer/15_rotation_and_flipping/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/15_rotation_and_flipping/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/15_rotation_and_flipping/CMakeFiles/edit_cache.dir
+D:/Dev/primer/15_rotation_and_flipping/CMakeFiles/rebuild_cache.dir

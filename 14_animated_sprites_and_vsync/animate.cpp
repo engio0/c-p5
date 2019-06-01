@@ -26,6 +26,7 @@ int main(int, char*[])
     {
         SDL_Surface* tmpSurface = NULL;
         tmpSurface = IMG_Load("./foo.png");
+        SDL_SetColorKey(tmpSurface, SDL_TRUE, SDL_MapRGB(tmpSurface->format, 0x00, 0xff, 0xff));
         hSpriteSheetTexture = SDL_CreateTextureFromSurface(hRenderer, tmpSurface);
         SDL_FreeSurface(tmpSurface);
     }
@@ -41,6 +42,12 @@ int main(int, char*[])
     bool quit = false;
     int frame = 0;
     SDL_Rect* currentClip;
+
+    int textureWidth, textureHeight;
+    SDL_QueryTexture(hSpriteSheetTexture, NULL, NULL, &textureWidth, &textureHeight);
+    SDL_Rect destRect = {(SCREEN_WIDTH - hSpriteClips[0].w)/2, (SCREEN_HEIGHT - hSpriteClips[0].h)/2,
+                         hSpriteClips[0].w, hSpriteClips[0].h};
+
     while (!quit) {
         while (SDL_PollEvent(&evt)) {
             switch (evt.type) {
@@ -58,7 +65,10 @@ int main(int, char*[])
             }
         }
         currentClip = &hSpriteClips[frame / 4];
-        SDL_RenderCopy(hRenderer, hSpriteSheetTexture, currentClip, NULL);
+
+        SDL_SetRenderDrawColor(hRenderer, 0xff, 0xff, 0xff, 0xff);
+        SDL_RenderClear(hRenderer);
+        SDL_RenderCopy(hRenderer, hSpriteSheetTexture, currentClip, &destRect);
         SDL_RenderPresent(hRenderer);
 
         ++frame;
