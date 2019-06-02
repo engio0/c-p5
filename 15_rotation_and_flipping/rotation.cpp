@@ -122,6 +122,10 @@ int main(int, char*[])
                         case SDLK_x:
                             flipType = SDL_FLIP_HORIZONTAL;
                             break;
+                        case SDLK_e:
+                            degrees = 0;
+                            flipType = SDL_FLIP_NONE;
+                            break;
                         default:
                             break;
                     }
