@@ -20,8 +20,8 @@ class LTexture
         void setBlendMode(SDL_BlendMode blending);
         void setAlpha(Uint8 alpha);
         void render(int x, int y, SDL_Rect* clip = NULL);
-        int getWidth() { return mWidth; };
-        int getHeight() {return mHeight; };
+        int getWidth() { return mWidth; }
+        int getHeight() {return mHeight; }
     private:
         SDL_Texture* mTexture = NULL;
         int mWidth = 0;

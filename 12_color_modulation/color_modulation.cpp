@@ -18,8 +18,8 @@ class LTexture
         bool loadFromFile(std::string path);
         void setColor(Uint8 red, Uint8 green, Uint8 blue);
         void render(int x, int y, SDL_Rect* clip = NULL);
-        int getWidth() { return mWidth; };
-        int getHeight() {return mHeight; };
+        int getWidth() { return mWidth; }
+        int getHeight() {return mHeight; }
     private:
         SDL_Texture* mTexture = NULL;
         int mWidth = 0;

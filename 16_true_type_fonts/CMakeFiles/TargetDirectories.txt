@@ -1,0 +1,4 @@
+D:/Dev/primer/16_true_type_fonts/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/16_true_type_fonts/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/16_true_type_fonts/CMakeFiles/edit_cache.dir
+D:/Dev/primer/16_true_type_fonts/CMakeFiles/rebuild_cache.dir
