@@ -200,9 +200,29 @@ void LButton::setPosition(int x, int y)
 
 void LButton::handleEvent(SDL_Event *e)
 {
+    int x, y;
+    bool inside = true;
     if (e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP) {
-        int x, y;
         SDL_GetMouseState(&x, &y);
+        if (x < mPosition.x || x > mPosition.x + BUTTON_WIDTH ||
+            y < mPosition.y || y > mPosition.y + BUTTON_HEIGHT) {
+            inside = false;
+        }
+    }
+    if (!inside) {
+        mCurrentSprite = BUTTON_SPRITE_MOUSE_OUT;
+    } else {
+        switch (e->type) {
+            case SDL_MOUSEMOTION:
+                mCurrentSprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
+                break;
+            case SDL_MOUSEBUTTONDOWN:
+                mCurrentSprite = BUTTON_SPRITE_MOUSE_DOWN;
+                break;
+            case SDL_MOUSEBUTTONUP:
+                mCurrentSprite = BUTTON_SPRITE_MOUSE_UP;
+                break;
+        }
     }
 }
 
