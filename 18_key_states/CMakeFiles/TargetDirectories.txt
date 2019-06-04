@@ -1,0 +1,4 @@
+D:/Dev/primer/18_key_states/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/18_key_states/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/18_key_states/CMakeFiles/edit_cache.dir
+D:/Dev/primer/18_key_states/CMakeFiles/rebuild_cache.dir

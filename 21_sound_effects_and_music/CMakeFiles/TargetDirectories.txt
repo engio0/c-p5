@@ -1,0 +1,4 @@
+D:/Dev/primer/21_sound_effects_and_music/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/21_sound_effects_and_music/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/21_sound_effects_and_music/CMakeFiles/edit_cache.dir
+D:/Dev/primer/21_sound_effects_and_music/CMakeFiles/rebuild_cache.dir
