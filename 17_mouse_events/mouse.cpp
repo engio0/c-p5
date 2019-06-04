@@ -54,6 +54,9 @@ SDL_Window *gWindow = NULL;
 SDL_Renderer *gRenderer = NULL;
 int SCREEN_WIDTH = 640;
 int SCREEN_HEIGHT = 480;
+LButton gButtons[TOTAL_BUTTONS];
+LTexture gButtonSpriteSheetTexture;
+SDL_Rect gSpriteClips[BUTTON_SPRITE_MOUSE_TOTAL];
 
 bool init()
 {
@@ -77,6 +80,12 @@ bool init()
     if (!gRenderer) {
         MessageBoxA(NULL, "SDL_CreateRenderer failed", "Error", MB_OK);
         return false;
+    }
+
+    for (int i = 0; i < 2; ++i) {
+        for (int j = 0; j < 2; ++j) {
+            gButtons[i + j*2].setPosition(i * BUTTON_WIDTH, j * BUTTON_HEIGHT);
+        }
     }
     return true;
 }
@@ -228,7 +237,24 @@ void LButton::handleEvent(SDL_Event *e)
 
 void LButton::render()
 {
+    gButtonSpriteSheetTexture.render(mPosition.x, mPosition.y, &gSpriteClips[mCurrentSprite]);
 }
+
+bool loadMedia()
+{
+    if (!gButtonSpriteSheetTexture.loadFromFile("./button.png")) {
+        MessageBoxA(NULL, "loadMedia loadFromFile failed!", "Error", MB_OK);
+        return false;
+    }
+    for (int i = 0; i < BUTTON_SPRITE_MOUSE_TOTAL; ++i) {
+        gSpriteClips[i].x = 0;
+        gSpriteClips[i].y = BUTTON_HEIGHT * i;
+        gSpriteClips[i].w = BUTTON_WIDTH;
+        gSpriteClips[i].h = BUTTON_HEIGHT;
+    }
+    return true;
+}
+
 
 int main(int, char*[])
 {
@@ -236,5 +262,45 @@ int main(int, char*[])
         MessageBoxA(NULL, "Initialization failed", "Error", MB_OK);
         return 1;
     }
+
+    if (!loadMedia()) {
+        MessageBoxA(NULL, "loadMedia failed!", "Error", MB_OK);
+        return 2;
+    }
+
+    bool quit = false;
+    SDL_Event e;
+
+    while (!quit) {
+        while (SDL_PollEvent(&e)) {
+            switch (e.type) {
+                case SDL_QUIT:
+                    quit = true;
+                    break;
+                case SDL_KEYDOWN:
+                    switch (e.key.keysym.sym) {
+                        case SDLK_q:
+                            quit = true;
+                            break;
+                        default:
+                            break;
+                    }
+                default:
+                    for (int i = 0; i < TOTAL_BUTTONS; ++i) {
+                        gButtons[i].handleEvent(&e);
+                    }
+                    break;
+            }
+        }
+
+        SDL_SetRenderDrawColor(gRenderer, 0xff, 0xff, 0xff, 0xff);
+        SDL_RenderClear(gRenderer);
+
+        for (int i = 0; i < TOTAL_BUTTONS; ++i) {
+            gButtons[i].render();
+        }
+        SDL_RenderPresent(gRenderer);
+    }
+
     return 0;
 }
