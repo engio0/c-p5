@@ -49,10 +49,14 @@ bool LTexture::loadFromFile(std::string path)
         return false;
     }
     mTexture = SDL_CreateTextureFromSurface(gRenderer, tmpSurface);
+    if (!mTexture) {
+        printf("Error SDL_CreateTextureFromSurface in LTexture::loadFromFile\n");
+    }
     mWidth = tmpSurface->w;
     mHeight = tmpSurface->h;
     SDL_FreeSurface(tmpSurface);
-    return (mTexture ? true : false);
+    return true;
+//    return (mTexture ? true : false);
 }
 
 void LTexture::render(int x, int y, SDL_Rect *clip)
@@ -86,7 +90,7 @@ bool init()
 
 bool loadMedia()
 {
-    if (!gPromptTexture->loadFromFile("./prompt.png")) {
+    if (!gPromptTexture.loadFromFile("./prompt.png")) {
         printf("Failed to load prompt texture!\n");
         return false;
     }
@@ -146,8 +150,71 @@ void close()
 int main(int, char*[])
 {
     if (!init()) {
-        printf("main::init failed!");
+        printf("main::init() failed!\n");
         return 1;
     }
+    if (!loadMedia()) {
+        printf("main::loadMedia() failed!\n");
+        return 1;
+    }
+
+    printf("init and loadMedia success!!!\n");
+
+    bool quit = false;
+    SDL_Event e;
+
+    while (!quit) {
+        while (SDL_PollEvent(&e)) {
+            switch (e.type) {
+                case SDL_QUIT:
+                    quit = true;
+                    break;
+                case SDL_KEYDOWN:
+                    switch (e.key.keysym.sym) {
+                        case SDLK_q:
+                            quit = true;
+                            break;
+                        case SDLK_1:
+                            Mix_PlayChannel(-1, gHigh, 0);
+                            break;
+                        case SDLK_2:
+                            Mix_PlayChannel(-1, gMedium, 0);
+                            break;
+                        case SDLK_3:
+                            Mix_PlayChannel(-1, gLow, 0);
+                            break;
+                        case SDLK_4:
+                            Mix_PlayChannel(-1, gScratch, 0);
+                            break;
+                        case SDLK_9:
+                            if (Mix_PlayingMusic() == 0) {
+                                Mix_PlayMusic(gMusic, -1);
+                            } else {
+                                if (Mix_PausedMusic() == 1) {
+                                    Mix_ResumeMusic();
+                                } else {
+                                    Mix_PauseMusic();
+                                }
+                            }
+                            break;
+                        case SDLK_0:
+                            Mix_HaltMusic();
+                            break;
+                        default:
+                            break;
+                    }
+                default:
+                    break;
+            }
+        }
+
+        SDL_SetRenderDrawColor(gRenderer, 0xff, 0xff, 0xff, 0xff);
+        SDL_RenderClear(gRenderer);
+        gPromptTexture.render(0, 0);
+        SDL_RenderPresent(gRenderer);
+    }
+
+    close();
+
     return 0;
 }
