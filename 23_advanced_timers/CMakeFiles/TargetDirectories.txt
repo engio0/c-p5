@@ -1,0 +1,4 @@
+D:/Dev/primer/23_advanced_timers/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/23_advanced_timers/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/23_advanced_timers/CMakeFiles/edit_cache.dir
+D:/Dev/primer/23_advanced_timers/CMakeFiles/rebuild_cache.dir

@@ -28,6 +28,7 @@ Mix_Chunk *gLow = NULL;
 LTexture gPromptTexture;
 SDL_Window *gWindow = NULL;
 SDL_Renderer *gRenderer = NULL;
+int SCREEN_WIDTH = 640, SCREEN_HEIGHT = 480;
 
 
 void LTexture::free()
@@ -83,6 +84,20 @@ bool init()
 
     if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) {
         printf("SDL_mixer could not initialize! SDL_mixer error: %s\n", Mix_GetError());
+        return false;
+    }
+
+    gWindow = SDL_CreateWindow("SDL2 Tutorial",
+                               SDL_WINDOWPOS_UNDEFINED,
+                               SDL_WINDOWPOS_UNDEFINED,
+                               SCREEN_WIDTH, SCREEN_HEIGHT, 0);
+    if (!gWindow) {
+        printf("SDL_CreateWindow failed! in init\n");
+        return false;
+    }
+    gRenderer = SDL_CreateRenderer(gWindow, -1, SDL_RENDERER_ACCELERATED);
+    if (!gRenderer) {
+        printf("SDL_CreateRenderer failed in init\n");
         return false;
     }
     return true;
