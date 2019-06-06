@@ -15,6 +15,10 @@ SDL_ttf.h
 -
 SDL_mixer.h
 -
+sstream
+-
+string
+-
 
 D:/usr/x86_64-w64-mingw32/include/SDL2/SDL.h
 SDL_main.h

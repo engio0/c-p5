@@ -45,8 +45,25 @@ TTF_Font *gFont = NULL;
 int SCREEN_WIDTH = 640, SCREEN_HEIGHT = 480;
 LTexture gStartPromptTexture, gPausePromptTexture, gTimeTextTexture;
 
+bool init();
+void close();
+
 int main(int, char*[])
 {
+    if (!init()) {
+        printf("main::init failed!\n");
+        return 1;
+    }
+
+    SDL_Color textColor = {0, 0, 0, 255};
+    if (!gStartPromptTexture.loadFromRenderedText("Press S to Start or Stop the Timer", textColor)) {
+        printf("loadFromRenderedText StartPromptTexture failed!\n");
+        return 1;
+    }
+    if (!gPausePromptTexture.loadFromRenderedText("Press P to Pause or Unpause the Timer", textColor)) {
+        printf("loadFromRenderedText gPausePromptTexture failed!\n");
+        return 1;
+    }
 
     LTimer timer;
     std::stringstream timeText;
@@ -91,8 +108,22 @@ int main(int, char*[])
         timeText.str("");
         timeText << "Seconds since start time " << (timer.getTicks() / 1000.f);
 
+        if (!gTimeTextTexture.loadFromRenderedText(timeText.str().c_str(), textColor)) {
+            printf("loadFromRenderedText %s failed!\n", timeText.str().c_str());
+            return 1;
+        }
+
+        SDL_SetRenderDrawColor(gRenderer, 0xff, 0xff, 0xff, 0xff);
+        SDL_RenderClear(gRenderer);
+
+        gStartPromptTexture.render((SCREEN_WIDTH - gStartPromptTexture.getWidth())/2, 0);
+        gPausePromptTexture.render((SCREEN_WIDTH - gPausePromptTexture.getWidth())/2, 
+                                                   gStartPromptTexture.getHeight());
+        gTimeTextTexture.render((SCREEN_WIDTH - gTimeTextTexture.getWidth())/2,
+                                (SCREEN_HEIGHT - gTimeTextTexture.getHeight())/2);
         SDL_RenderPresent(gRenderer);
     }
+    close();
     return 0;
 }
 
@@ -241,14 +272,33 @@ bool LTexture::loadFromFile(std::string path)
     return true;
 }
 
-bool loadFromRenderedText(std::string text, SDL_Color color)
+bool LTexture::loadFromRenderedText(std::string text, SDL_Color color)
 {
     if (mTexture) free();
 
-    SDL_Surface *tmpSurface = TTF_RenderText_Solid(gFont, text.c_str(), color);:wq
+    SDL_Surface *tmpSurface = TTF_RenderText_Solid(gFont, text.c_str(), color);
+    if (!tmpSurface) {
+        printf("TTF_RenderText_Solif failed!\n");
+        return false;
+    }
+    mTexture = SDL_CreateTextureFromSurface(gRenderer, tmpSurface);
+    if (!mTexture) {
+        printf("SDL_CreateTextureFromSurface failed!\n");
+        return false;
+    }
+    mWidth = tmpSurface->w;
+    mHeight = tmpSurface->h;
+
+    SDL_FreeSurface(tmpSurface);
     return true;
 }
 
-void render(int x, int y, SDL_Rect *clip = NULL)
+void LTexture::render(int x, int y, SDL_Rect *clip)
 {
+    SDL_Rect destRect = {x, y, mWidth, mHeight};
+    if (clip) {
+        destRect.w = clip->w;
+        destRect.h = clip->h;
+    }
+    SDL_RenderCopy(gRenderer, mTexture, clip, &destRect);
 }
