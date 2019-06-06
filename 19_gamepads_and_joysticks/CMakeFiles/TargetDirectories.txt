@@ -1,0 +1,4 @@
+D:/Dev/primer/19_gamepads_and_joysticks/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/19_gamepads_and_joysticks/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/19_gamepads_and_joysticks/CMakeFiles/edit_cache.dir
+D:/Dev/primer/19_gamepads_and_joysticks/CMakeFiles/rebuild_cache.dir

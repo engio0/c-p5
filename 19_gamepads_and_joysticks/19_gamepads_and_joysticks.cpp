@@ -1,19 +1,19 @@
 /*This source code copyrighted by Lazy Foo' Productions (2004-2019)
 and may not be redistributed without written permission.*/
 
-//Using SDL, SDL_image, SDL_ttf, standard IO, strings, and string streams
+//Using SDL, SDL_image, standard IO, math, and strings
 #include <SDL.h>
 #include <SDL_image.h>
-#include <SDL_ttf.h>
 #include <stdio.h>
 #include <string>
-#include <sstream>
+#include <cmath>
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
-const int SCREEN_FPS = 60;
-const int SCREEN_TICK_PER_FRAME = 1000 / SCREEN_FPS;
+
+//Analog joystick dead zone
+const int JOYSTICK_DEAD_ZONE = 8000;
 
 //Texture wrapper class
 class LTexture
@@ -28,7 +28,7 @@ class LTexture
 		//Loads image at specified path
 		bool loadFromFile( std::string path );
 		
-		#ifdef SDL_TTF_H_
+		#ifdef _SDL_TTF_H
 		//Creates image from font string
 		bool loadFromRenderedText( std::string textureText, SDL_Color textColor );
 		#endif
@@ -61,38 +61,6 @@ class LTexture
 		int mHeight;
 };
 
-//The application time based timer
-class LTimer
-{
-    public:
-		//Initializes variables
-		LTimer();
-
-		//The various clock actions
-		void start();
-		void stop();
-		void pause();
-		void unpause();
-
-		//Gets the timer's time
-		Uint32 getTicks();
-
-		//Checks the status of the timer
-		bool isStarted();
-		bool isPaused();
-
-    private:
-		//The clock time when the timer started
-		Uint32 mStartTicks;
-
-		//The ticks stored when the timer was paused
-		Uint32 mPausedTicks;
-
-		//The timer status
-		bool mPaused;
-		bool mStarted;
-};
-
 //Starts up SDL and creates window
 bool init();
 
@@ -108,11 +76,12 @@ SDL_Window* gWindow = NULL;
 //The window renderer
 SDL_Renderer* gRenderer = NULL;
 
-//Globally used font
-TTF_Font* gFont = NULL;
-
 //Scene textures
-LTexture gFPSTextTexture;
+LTexture gArrowTexture;
+
+//Game Controller 1 handler
+SDL_Joystick* gGameController = NULL;
+
 
 LTexture::LTexture()
 {
@@ -169,7 +138,7 @@ bool LTexture::loadFromFile( std::string path )
 	return mTexture != NULL;
 }
 
-#ifdef SDL_TTF_H_
+#ifdef _SDL_TTF_H
 bool LTexture::loadFromRenderedText( std::string textureText, SDL_Color textColor )
 {
 	//Get rid of preexisting texture
@@ -262,117 +231,15 @@ int LTexture::getHeight()
 	return mHeight;
 }
 
-LTimer::LTimer()
-{
-    //Initialize the variables
-    mStartTicks = 0;
-    mPausedTicks = 0;
-
-    mPaused = false;
-    mStarted = false;
-}
-
-void LTimer::start()
-{
-    //Start the timer
-    mStarted = true;
-
-    //Unpause the timer
-    mPaused = false;
-
-    //Get the current clock time
-    mStartTicks = SDL_GetTicks();
-	mPausedTicks = 0;
-}
-
-void LTimer::stop()
-{
-    //Stop the timer
-    mStarted = false;
-
-    //Unpause the timer
-    mPaused = false;
-
-	//Clear tick variables
-	mStartTicks = 0;
-	mPausedTicks = 0;
-}
-
-void LTimer::pause()
-{
-    //If the timer is running and isn't already paused
-    if( mStarted && !mPaused )
-    {
-        //Pause the timer
-        mPaused = true;
-
-        //Calculate the paused ticks
-        mPausedTicks = SDL_GetTicks() - mStartTicks;
-		mStartTicks = 0;
-    }
-}
-
-void LTimer::unpause()
-{
-    //If the timer is running and paused
-    if( mStarted && mPaused )
-    {
-        //Unpause the timer
-        mPaused = false;
-
-        //Reset the starting ticks
-        mStartTicks = SDL_GetTicks() - mPausedTicks;
-
-        //Reset the paused ticks
-        mPausedTicks = 0;
-    }
-}
-
-Uint32 LTimer::getTicks()
-{
-	//The actual timer time
-	Uint32 time = 0;
-
-    //If the timer is running
-    if( mStarted )
-    {
-        //If the timer is paused
-        if( mPaused )
-        {
-            //Return the number of ticks when the timer was paused
-            time = mPausedTicks;
-        }
-        else
-        {
-            //Return the current time minus the start time
-            time = SDL_GetTicks() - mStartTicks;
-        }
-    }
-
-    return time;
-}
-
-bool LTimer::isStarted()
-{
-	//Timer is running and paused or unpaused
-    return mStarted;
-}
-
-bool LTimer::isPaused()
-{
-	//Timer is running and paused
-    return mPaused && mStarted;
-}
-
 bool init()
 {
 	//Initialization flag
 	bool success = true;
 
 	//Initialize SDL
-	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
+	if( SDL_Init( SDL_INIT_VIDEO | SDL_INIT_JOYSTICK ) < 0 )
 	{
-		printf( "SDL could not initialize! %s\n", SDL_GetError() );
+		printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
 		success = false;
 	}
 	else
@@ -381,6 +248,21 @@ bool init()
 		if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "1" ) )
 		{
 			printf( "Warning: Linear texture filtering not enabled!" );
+		}
+
+		//Check for joysticks
+		if( SDL_NumJoysticks() < 1 )
+		{
+			printf( "Warning: No joysticks connected!\n" );
+		}
+		else
+		{
+			//Load joystick
+			gGameController = SDL_JoystickOpen( 0 );
+			if( gGameController == NULL )
+			{
+				printf( "Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError() );
+			}
 		}
 
 		//Create window
@@ -392,8 +274,8 @@ bool init()
 		}
 		else
 		{
-			//Create renderer for window
-			gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED );
+			//Create vsynced renderer for window
+			gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC );
 			if( gRenderer == NULL )
 			{
 				printf( "Renderer could not be created! SDL Error: %s\n", SDL_GetError() );
@@ -411,13 +293,6 @@ bool init()
 					printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
 					success = false;
 				}
-
-				 //Initialize SDL_ttf
-				if( TTF_Init() == -1 )
-				{
-					printf( "SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError() );
-					success = false;
-				}
 			}
 		}
 	}
@@ -430,25 +305,24 @@ bool loadMedia()
 	//Loading success flag
 	bool success = true;
 
-	//Open the font
-	gFont = TTF_OpenFont( "25_capping_frame_rate/lazy.ttf", 28 );
-	if( gFont == NULL )
+	//Load arrow texture
+	if( !gArrowTexture.loadFromFile( "19_gamepads_and_joysticks/arrow.png" ) )
 	{
-		printf( "Failed to load lazy font! SDL_ttf Error: %s\n", TTF_GetError() );
+		printf( "Failed to load arrow texture!\n" );
 		success = false;
 	}
-
+	
 	return success;
 }
 
 void close()
 {
 	//Free loaded images
-	gFPSTextTexture.free();
+	gArrowTexture.free();
 
-	//Free global font
-	TTF_CloseFont( gFont );
-	gFont = NULL;
+	//Close game controller
+	SDL_JoystickClose( gGameController );
+	gGameController = NULL;
 
 	//Destroy window	
 	SDL_DestroyRenderer( gRenderer );
@@ -457,7 +331,6 @@ void close()
 	gRenderer = NULL;
 
 	//Quit SDL subsystems
-	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();
 }
@@ -484,28 +357,13 @@ int main( int argc, char* args[] )
 			//Event handler
 			SDL_Event e;
 
-			//Set text color as black
-			SDL_Color textColor = { 0, 0, 0, 255 };
-
-			//The frames per second timer
-			LTimer fpsTimer;
-
-			//The frames per second cap timer
-			LTimer capTimer;
-
-			//In memory text stream
-			std::stringstream timeText;
-
-			//Start counting frames per second
-			int countedFrames = 0;
-			fpsTimer.start();
+			//Normalized direction
+			int xDir = 0;
+			int yDir = 0;
 
 			//While application is running
 			while( !quit )
 			{
-				//Start cap timer
-				capTimer.start();
-
 				//Handle events on queue
 				while( SDL_PollEvent( &e ) != 0 )
 				{
@@ -514,43 +372,69 @@ int main( int argc, char* args[] )
 					{
 						quit = true;
 					}
-				}
-
-				//Calculate and correct fps
-				float avgFPS = countedFrames / ( fpsTimer.getTicks() / 1000.f );
-				if( avgFPS > 2000000 )
-				{
-					avgFPS = 0;
-				}
-
-				//Set text to be rendered
-				timeText.str( "" );
-				timeText << "Average Frames Per Second (With Cap) " << avgFPS; 
-
-				//Render text
-				if( !gFPSTextTexture.loadFromRenderedText( timeText.str().c_str(), textColor ) )
-				{
-					printf( "Unable to render FPS texture!\n" );
+					else if( e.type == SDL_JOYAXISMOTION )
+					{
+						//Motion on controller 0
+						if( e.jaxis.which == 0 )
+						{						
+							//X axis motion
+							if( e.jaxis.axis == 0 )
+							{
+								//Left of dead zone
+								if( e.jaxis.value < -JOYSTICK_DEAD_ZONE )
+								{
+									xDir = -1;
+								}
+								//Right of dead zone
+								else if( e.jaxis.value > JOYSTICK_DEAD_ZONE )
+								{
+									xDir =  1;
+								}
+								else
+								{
+									xDir = 0;
+								}
+							}
+							//Y axis motion
+							else if( e.jaxis.axis == 1 )
+							{
+								//Below of dead zone
+								if( e.jaxis.value < -JOYSTICK_DEAD_ZONE )
+								{
+									yDir = -1;
+								}
+								//Above of dead zone
+								else if( e.jaxis.value > JOYSTICK_DEAD_ZONE )
+								{
+									yDir =  1;
+								}
+								else
+								{
+									yDir = 0;
+								}
+							}
+						}
+					}
 				}
 
 				//Clear screen
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 				SDL_RenderClear( gRenderer );
 
-				//Render textures
-				gFPSTextTexture.render( ( SCREEN_WIDTH - gFPSTextTexture.getWidth() ) / 2, ( SCREEN_HEIGHT - gFPSTextTexture.getHeight() ) / 2 );
+				//Calculate angle
+				double joystickAngle = atan2( (double)yDir, (double)xDir ) * ( 180.0 / M_PI );
+				
+				//Correct angle
+				if( xDir == 0 && yDir == 0 )
+				{
+					joystickAngle = 0;
+				}
+
+				//Render joystick 8 way angle
+				gArrowTexture.render( ( SCREEN_WIDTH - gArrowTexture.getWidth() ) / 2, ( SCREEN_HEIGHT - gArrowTexture.getHeight() ) / 2, NULL, joystickAngle );
 
 				//Update screen
 				SDL_RenderPresent( gRenderer );
-				++countedFrames;
-
-				//If frame finished early
-				int frameTicks = capTimer.getTicks();
-				if( frameTicks < SCREEN_TICK_PER_FRAME )
-				{
-					//Wait remaining time
-					SDL_Delay( SCREEN_TICK_PER_FRAME - frameTicks );
-				}
 			}
 		}
 	}

@@ -52,11 +52,12 @@ int main(int, char*[])
     }
 
     SDL_Color textColor = {0, 0, 0, 255};
-    LTimer fpsTimer;
+    LTimer fpsTimer, capTImer;
     LTexture fpsTextTexture;
     std::stringstream timeText;
     int countFrames = 0;
     double avgFPS = 0.0;
+    int frameTicks = 0;
 
     fpsTimer.start();
 
@@ -64,6 +65,7 @@ int main(int, char*[])
     SDL_Event e;
 
     while (!quit) {
+        capTImer.start();
         while (SDL_PollEvent(&e)) {
             switch (e.type) {
                 case SDL_QUIT:
@@ -84,7 +86,7 @@ int main(int, char*[])
         avgFPS = countFrames / (fpsTimer.getTicks() / 1000.0);
 
         timeText.str("");
-        timeText << "Average Frames Per Second : "  << avgFPS;
+        timeText << "Average Frames Per Second (With Cap) : "  << avgFPS;
 
         if (!fpsTextTexture.loadFromRenderedText(timeText.str().c_str(), textColor)) {
             printf("Unable to render FPS texture!\n");
@@ -101,6 +103,11 @@ int main(int, char*[])
         timeText << "SDL2 Tutorial - " << countFrames << " / " << (fpsTimer.getTicks()/1000.0);
         SDL_SetWindowTitle(gWindow, timeText.str().c_str());
         ++countFrames;
+
+        frameTicks = capTImer.getTicks();
+        if (frameTicks < SCREEN_TICKS_PER_FRAME) {
+            SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
+        }
     }
     close();
     return 0;
