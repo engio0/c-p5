@@ -1,0 +1,4 @@
+D:/Dev/primer/24_calculating_frame_rate/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/24_calculating_frame_rate/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/24_calculating_frame_rate/CMakeFiles/edit_cache.dir
+D:/Dev/primer/24_calculating_frame_rate/CMakeFiles/rebuild_cache.dir
