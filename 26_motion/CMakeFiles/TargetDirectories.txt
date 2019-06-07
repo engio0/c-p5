@@ -1,0 +1,4 @@
+D:/Dev/primer/26_motion/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/26_motion/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/26_motion/CMakeFiles/edit_cache.dir
+D:/Dev/primer/26_motion/CMakeFiles/rebuild_cache.dir
