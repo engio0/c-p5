@@ -11,6 +11,12 @@ SDL.h
 -
 SDL_image.h
 -
+SDL_ttf.h
+-
+cstdio
+-
+string
+-
 
 D:/usr/x86_64-w64-mingw32/include/SDL2/SDL.h
 SDL_main.h
@@ -585,6 +591,14 @@ SDL_error.h
 D:/usr/x86_64-w64-mingw32/include/SDL2/SDL_error.h
 SDL_video.h
 D:/usr/x86_64-w64-mingw32/include/SDL2/SDL_video.h
+begin_code.h
+D:/usr/x86_64-w64-mingw32/include/SDL2/begin_code.h
+close_code.h
+D:/usr/x86_64-w64-mingw32/include/SDL2/close_code.h
+
+D:/usr/x86_64-w64-mingw32/include/SDL2/SDL_ttf.h
+SDL.h
+D:/usr/x86_64-w64-mingw32/include/SDL2/SDL.h
 begin_code.h
 D:/usr/x86_64-w64-mingw32/include/SDL2/begin_code.h
 close_code.h

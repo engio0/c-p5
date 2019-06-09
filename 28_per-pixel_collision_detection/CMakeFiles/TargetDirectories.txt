@@ -1,0 +1,4 @@
+D:/Dev/primer/28_per-pixel_collision_detection/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/28_per-pixel_collision_detection/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/28_per-pixel_collision_detection/CMakeFiles/edit_cache.dir
+D:/Dev/primer/28_per-pixel_collision_detection/CMakeFiles/rebuild_cache.dir

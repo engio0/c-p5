@@ -27,13 +27,22 @@ class LTexture
 
 class Dot
 {
+    public:
+        Dot();
+        void handleEvent(SDL_Event &e);
+        void move(SDL_Rect &wall);
+        void render();
+    private:
+        static const int DOT_WIDTH = 20, DOT_HEIGHT = 20, DOT_VEL = 10;
+        int mPosX = 0, mPosY = 0;
+        int mVelX = 0, mVelY = 0;
+        SDL_Rect mCollider = {mPosX, mPosY, DOT_WIDTH, DOT_HEIGHT};
 };
 
 bool init();
 bool loadMedia();
 void close();
 bool checkCollision(SDL_Rect &a, SDL_Rect &b);
-
 
 SDL_Window *gWindow = NULL;
 SDL_Renderer *gRenderer = NULL;
@@ -99,5 +108,10 @@ bool LTexture::loadFromRenderedText(std::string text, SDL_Color color)
 
 void LTexture::render(int x, int y, SDL_Rect *clip, double angle, SDL_Point *center, SDL_RendererFlip flip)
 {
+    SDL_Rect destRect = {x, y, mWidth, mHeight};
+    if (clip) {
+        destRect.w = clip->w;
+        destRect.h = clip->h;
+    }
+    SDL_RenderCopyEx(gRenderer, mTexture, clip, &destRect, angle, center, flip);
 }
-

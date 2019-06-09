@@ -7,7 +7,7 @@
 #IncludeRegexTransform: 
 
 D:/Dev/primer/19_gamepads_and_joysticks/stick.cpp
-SDL_log.h
+SDL.h
 -
 SDL_image.h
 -

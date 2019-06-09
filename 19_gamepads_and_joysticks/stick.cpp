@@ -1,4 +1,4 @@
-#include <SDL_log.h>
+#include <SDL.h>
 #include <SDL_image.h>
 #include <windows.h>
 #include <cstdio>
@@ -16,11 +16,9 @@ class LTexture
         int getHeight() { return mHeight; }
         void render(int x, int y, SDL_Rect *clip = NULL, double angle = 0,
                     SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE);
-
     private:
         SDL_Texture *mTexture = NULL;
-        int mWidth = 0;
-        int mHeight = 0;
+        int mWidth = 0, mHeight = 0;
 };
 
 bool init();
@@ -101,7 +99,7 @@ int main(int, char*[])
         SDL_SetRenderDrawColor(gRenderer, 0xff, 0xff, 0xff, 0xff);
         SDL_RenderClear(gRenderer);
 
-        double joystickAngle = atan2( (double)yDir, (double)xDir * (180.0 / M_PI) );
+        double joystickAngle = atan2( (double)yDir, (double)xDir ) * (180.0 / M_PI);
         if (xDir == 0 && yDir == 0) {
             joystickAngle = 0;
         }
@@ -126,7 +124,7 @@ void LTexture::free()
     }
 }
 
-#ifdef SDL_IMG_H_
+#ifdef SDL_IMAGE_H_
 bool LTexture::loadFromFile(std::string path)
 {
     if (mTexture) free();
