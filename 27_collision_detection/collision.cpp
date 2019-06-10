@@ -177,8 +177,16 @@ void Dot::handleEvent(SDL_Event &e)
         }
     }
     if (e.type == SDL_KEYUP) {
-        mVelX = 0;
-        mVelY = 0;
+        switch (e.key.keysym.sym) {
+            case SDLK_LEFT:
+            case SDLK_RIGHT:
+                mVelX = 0;
+                break;
+            case SDLK_UP:
+            case SDLK_DOWN:
+                mVelY = 0;
+                break;
+        }
     }
 }
 
