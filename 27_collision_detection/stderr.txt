@@ -1,0 +1,2 @@
+TTF_OpenFont failed! in init
+Error in main::init!
