@@ -29,9 +29,7 @@ class Dot
 {
     public:
         static const int DOT_WIDTH = 20, DOT_HEIGHT = 20;
-//        static const int DOT_VEL = 1;
-        static int DOT_VEL;
-        Dot() {};
+        static const int DOT_VEL = 1;
         Dot(int x, int y);
         void handleEvent(SDL_Event &e);
         void move(SDL_Rect &wall);
@@ -60,8 +58,6 @@ TTF_Font *gFont = NULL;
 #endif
 LTexture gDotTexture;
 const int SCREEN_WIDTH = 640, SCREEN_HEIGHT = 480;
-
-int Dot::DOT_VEL = 10;
 
 int main(int, char*[])
 {
@@ -308,7 +304,8 @@ bool loadMedia()
     return true;
 }
 
-bool checkCollision(std::vector<SDL_Rect> &a, std::vector<SDL_Rect> &b) {
+bool checkCollision(std::vector<SDL_Rect> &a, std::vector<SDL_Rect> &b) 
+{
     for (size_t Abox = 0; Abox < a.size(); ++Abox) {
         for (size_t Bbox = 0; Bbox < b.size(); ++Bbox) {
             if ( (a[Abox].x >= b[Bbox].x + b[Bbox].w) || (b[Bbox].x >= a[Abox].x + a[Abox].w) ||
