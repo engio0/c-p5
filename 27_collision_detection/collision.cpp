@@ -27,11 +27,13 @@ class LTexture
 class Dot
 {
     public:
+        static const int DOT_WIDTH = 20, DOT_HEIGHT = 20;
+        static int DOT_VEL;
         void handleEvent(SDL_Event &e);
         void move(SDL_Rect &wall);
         void render();
+        void outline();
     private:
-        static const int DOT_WIDTH = 20, DOT_HEIGHT = 20, DOT_VEL = 10;
         int mPosX = 0, mPosY = 0;
         int mVelX = 0, mVelY = 0;
         SDL_Rect mCollider = {mPosX, mPosY, DOT_WIDTH, DOT_HEIGHT};
@@ -50,9 +52,12 @@ TTF_Font *gFont = NULL;
 LTexture gDotTexture;
 const int SCREEN_WIDTH = 640, SCREEN_HEIGHT = 480;
 
+int Dot::DOT_VEL = 10;
 
 int main(int, char*[])
 {
+    char szBuffer[81];
+
     if (!init()) {
         printf("Error in main::init!\n");
         return 1;
@@ -80,6 +85,14 @@ int main(int, char*[])
                         case SDLK_q:
                             quit = true;
                             break;
+                        case SDLK_EQUALS:
+                        case SDLK_PLUS:
+                            ++Dot::DOT_VEL;
+                            break;
+                        case SDLK_UNDERSCORE:
+                        case SDLK_MINUS:
+                            if (Dot::DOT_VEL > 1) --Dot::DOT_VEL;
+                            break;
                         default:
                             break;
                     }
@@ -91,6 +104,9 @@ int main(int, char*[])
         }
         dot.move(wall);
 
+        sprintf(szBuffer, "SDL2Tutorial - VEL : %d", Dot::DOT_VEL);
+        SDL_SetWindowTitle(gWindow, szBuffer);
+
         SDL_SetRenderDrawColor(gRenderer, 0xff, 0xff, 0xff, 0xff);
         SDL_RenderClear(gRenderer);
 
@@ -98,6 +114,7 @@ int main(int, char*[])
         SDL_RenderDrawRect(gRenderer, &wall);
 
         dot.render();
+        dot.outline();
 
         SDL_RenderPresent(gRenderer);
     }
@@ -212,6 +229,12 @@ void Dot::render()
     gDotTexture.render(mPosX, mPosY);
 }
 
+void Dot::outline()
+{
+    SDL_Rect rectOutline = {mPosX, mPosY, DOT_WIDTH, DOT_HEIGHT};
+    SDL_RenderDrawRect(gRenderer, &rectOutline);
+}
+
 bool loadMedia()
 {
     if (!gDotTexture.loadFromFile("./dot.bmp")) {
@@ -223,8 +246,8 @@ bool loadMedia()
 
 bool checkCollision(SDL_Rect &a, SDL_Rect &b)
 {
-    if ( (a.x > b.x + b.w) || (b.x > a.x + a.w) ||
-         (a.y > b.y + b.h) || (b.y > a.y + a.h) ) return false;
+    if ( (a.x >= b.x + b.w) || (b.x >= a.x + a.w) ||
+         (a.y >= b.y + b.h) || (b.y >= a.y + a.h) ) return false;
     return true;
 }
 
