@@ -79,9 +79,8 @@ int main(int, char*[])
     bool quit = false;
     SDL_Event e;
 
-    Dot dot;
-
-    SDL_Rect wall = {300, 40, 40, 400};
+    Dot dot(0, 0);
+    Dot otherDot(SCREEN_WIDTH/4, SCREEN_HEIGHT/4);
 
     while (!quit) {
         while (SDL_PollEvent(&e)) {
@@ -111,7 +110,7 @@ int main(int, char*[])
             }
             dot.handleEvent(e);
         }
-//        dot.move(wall);
+        dot.move(otherDot.getColliders());
 
         sprintf(szBuffer, "SDL2Tutorial - VEL : %d", Dot::DOT_VEL);
         SDL_SetWindowTitle(gWindow, szBuffer);
@@ -120,10 +119,9 @@ int main(int, char*[])
         SDL_RenderClear(gRenderer);
 
         SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 0xff);
-        SDL_RenderDrawRect(gRenderer, &wall);
 
         dot.render();
-        dot.outline();
+        otherDot.render();
 
         SDL_RenderPresent(gRenderer);
     }
@@ -260,23 +258,6 @@ void Dot::handleEvent(SDL_Event &e)
     }
 }
 
-//void Dot::move(SDL_Rect &wall)
-//{
-//    mPosX += mVelX;
-//    mPosY += mVelY;
-//    mCollider.x = mPosX;
-//    mCollider.y = mPosY;
-//
-//    if ((mPosX < 0) || (mPosX + DOT_WIDTH > SCREEN_WIDTH) || checkCollision(mCollider, wall)) {
-//        mPosX -= mVelX;
-//        mCollider.x = mPosX;
-//    }
-//    if ((mPosY < 0) || (mPosY + DOT_HEIGHT > SCREEN_HEIGHT) || checkCollision(mCollider, wall)) {
-//        mPosY -= mVelY;
-//        mCollider.y = mPosY;
-//    }
-//}
-
 void Dot::move(std::vector<SDL_Rect> &otherColliders)
 {
     mPosX += mVelX;
@@ -302,6 +283,11 @@ void Dot::shiftColliders()
     }
 }
 
+std::vector<SDL_Rect> &Dot::getColliders()
+{
+    return mColliders;
+}
+
 void Dot::render()
 {
     gDotTexture.render(mPosX, mPosY);
@@ -322,8 +308,13 @@ bool loadMedia()
     return true;
 }
 
-bool checkCollision(std::vector<SDL_Rect> &a, std::vector<SDL_Rect> &b)
-{
+bool checkCollision(std::vector<SDL_Rect> &a, std::vector<SDL_Rect> &b) {
+    for (size_t Abox = 0; Abox < a.size(); ++Abox) {
+        for (size_t Bbox = 0; Bbox < b.size(); ++Bbox) {
+            if ( (a[Abox].x >= b[Bbox].x + b[Bbox].w) || (b[Bbox].x >= a[Abox].x + a[Abox].w) ||
+                 (a[Abox].y >= b[Bbox].y + b[Bbox].h) || (b[Bbox].y >= a[Abox].y + a[Abox].h) ) return false;
+        }
+    }
     return true;
 }
 
