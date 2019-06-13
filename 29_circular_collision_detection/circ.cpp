@@ -4,6 +4,12 @@
 #include <string>
 #include <vector>
 
+struct Circle
+{
+    int x, y;
+    int r;
+};
+
 class LTexture
 {
     public:
@@ -32,22 +38,23 @@ class Dot
         static const int DOT_VEL = 1;
         Dot(int x, int y);
         void handleEvent(SDL_Event &e);
-        void move(SDL_Rect &wall);
-        void move(std::vector<SDL_Rect> &otherColliders);
+        void move(SDL_Rect &square, Circle &circle);
         void render();
         void outline();
         std::vector<SDL_Rect> &getColliders();
     private:
         int mPosX = 0, mPosY = 0;
         int mVelX = 0, mVelY = 0;
-        std::vector<SDL_Rect> mColliders;
+        Circle mColliders;
         void shiftColliders();
 };
 
 bool init();
 bool loadMedia();
 void close();
-bool checkCollision(std::vector<SDL_Rect> &a, std::vector<SDL_Rect> &b);
+bool checkCollision(Circle &a, Circle &b);
+bool checkCollision(Circle &a, SDL_Rect &b);
+double distanceSquared(int x1, int y1, int x2, int y2);
 
 SDL_Window *gWindow = NULL;
 SDL_Renderer *gRenderer = NULL;
@@ -189,43 +196,9 @@ Dot::Dot(int x, int y)
 {
     mPosX = x;
     mPosY = y;
-    mColliders.resize(11);
+    mColliders.r = DOT_WIDTH/2;
     mVelX = 0;
     mVelY = 0;
-
-    mColliders[ 0 ].w = 6;
-    mColliders[ 0 ].h = 1;
-
-    mColliders[ 1 ].w = 10;
-    mColliders[ 1 ].h = 1;
-
-    mColliders[ 2 ].w = 14;
-    mColliders[ 2 ].h = 1;
-
-    mColliders[ 3 ].w = 16;
-    mColliders[ 3 ].h = 2;
-
-    mColliders[ 4 ].w = 18;
-    mColliders[ 4 ].h = 2;
-
-    mColliders[ 5 ].w = 20;
-    mColliders[ 5 ].h = 6;
-
-    mColliders[ 6 ].w = 18;
-    mColliders[ 6 ].h = 2;
-
-    mColliders[ 7 ].w = 16;
-    mColliders[ 7 ].h = 2;
-
-    mColliders[ 8 ].w = 14;
-    mColliders[ 8 ].h = 1;
-
-    mColliders[ 9 ].w = 10;
-    mColliders[ 9 ].h = 1;
-
-    mColliders[ 10 ].w = 6;
-    mColliders[ 10 ].h = 1;
-
     shiftColliders();
 }
 
@@ -253,16 +226,18 @@ void Dot::handleEvent(SDL_Event &e)
     }
 }
 
-void Dot::move(std::vector<SDL_Rect> &otherColliders)
+void Dot::move(SDL_Rect &square, Circle &circle)
 {
     mPosX += mVelX;
     mPosY += mVelY;
     shiftColliders();
-    if ( (mPosX < 0) || (mPosX + DOT_WIDTH > SCREEN_WIDTH) || checkCollision(mColliders, otherColliders) ) {
+    if ( (mPosX < 0) || (mPosX + DOT_WIDTH > SCREEN_WIDTH) ||
+          checkCollision(mColliders, circle) || checkCollision(mColliders, square) ) {
         mPosX -= mVelX;
         shiftColliders();
     }
-    if ( (mPosY < 0) || (mPosY + DOT_HEIGHT > SCREEN_HEIGHT) || checkCollision(mColliders, otherColliders) ) {
+    if ( (mPosY < 0) || (mPosY + DOT_HEIGHT > SCREEN_HEIGHT) ||
+          checkCollision(mColliders, circle) || checkCollision(mColliders, square) ) {
         mPosY -= mVelY;
         shiftColliders();
     }
@@ -285,7 +260,7 @@ std::vector<SDL_Rect> &Dot::getColliders()
 
 void Dot::render()
 {
-    gDotTexture.render(mPosX, mPosY);
+    gDotTexture.render(mPosX - mColliders.r, mPosY - mColliders.r);
 }
 
 void Dot::outline()
@@ -303,15 +278,18 @@ bool loadMedia()
     return true;
 }
 
-bool checkCollision(std::vector<SDL_Rect> &a, std::vector<SDL_Rect> &b) 
+bool checkCollision(Circle &a, Circle &b) 
 {
-    for (size_t Abox = 0; Abox < a.size(); ++Abox) {
-        for (size_t Bbox = 0; Bbox < b.size(); ++Bbox) {
-            if ( (a[Abox].x >= b[Bbox].x + b[Bbox].w) || (b[Bbox].x >= a[Abox].x + a[Abox].w) ||
-                 (a[Abox].y >= b[Bbox].y + b[Bbox].h) || (b[Bbox].y >= a[Abox].y + a[Abox].h) ) continue;
-            return true;
-        }
+    int rSq = a.r + b.r;
+    rSq *= rSq;
+    if (distanceSquared(a.x, a.y, b.x, b.y) < rSq) {
+        return true;
     }
+    return false;
+}
+
+bool checkCollision(Circle &a, SDL_Rect &b)
+{
     return false;
 }
 
