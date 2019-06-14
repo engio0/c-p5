@@ -18,6 +18,7 @@ CMakeFiles/SDL2Test.dir/circ.cpp.obj: D:/usr/x86_64-w64-mingw32/include/SDL2/SDL
 CMakeFiles/SDL2Test.dir/circ.cpp.obj: D:/usr/x86_64-w64-mingw32/include/SDL2/SDL_gesture.h
 CMakeFiles/SDL2Test.dir/circ.cpp.obj: D:/usr/x86_64-w64-mingw32/include/SDL2/SDL_haptic.h
 CMakeFiles/SDL2Test.dir/circ.cpp.obj: D:/usr/x86_64-w64-mingw32/include/SDL2/SDL_hints.h
+CMakeFiles/SDL2Test.dir/circ.cpp.obj: D:/usr/x86_64-w64-mingw32/include/SDL2/SDL_image.h
 CMakeFiles/SDL2Test.dir/circ.cpp.obj: D:/usr/x86_64-w64-mingw32/include/SDL2/SDL_joystick.h
 CMakeFiles/SDL2Test.dir/circ.cpp.obj: D:/usr/x86_64-w64-mingw32/include/SDL2/SDL_keyboard.h
 CMakeFiles/SDL2Test.dir/circ.cpp.obj: D:/usr/x86_64-w64-mingw32/include/SDL2/SDL_keycode.h

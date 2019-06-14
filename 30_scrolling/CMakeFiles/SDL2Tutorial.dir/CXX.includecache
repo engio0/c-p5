@@ -6,16 +6,14 @@
 
 #IncludeRegexTransform: 
 
-D:/Dev/primer/29_circular_collision_detection/circ.cpp
+D:/Dev/primer/30_scrolling/30_scrolling.cpp
 SDL.h
 -
 SDL_image.h
 -
-cstdio
+stdio.h
 -
 string
--
-vector
 -
 
 D:/usr/x86_64-w64-mingw32/include/SDL2/SDL.h

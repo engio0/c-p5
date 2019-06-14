@@ -39,9 +39,9 @@ class Dot
         Dot(int x, int y);
         void handleEvent(SDL_Event &e);
         void move(SDL_Rect &square, Circle &circle);
+        void move(Circle &circle, SDL_Rect &square) { move(square, circle); }
         void render();
-        void outline();
-        std::vector<SDL_Rect> &getColliders();
+        Circle &getColliders();
     private:
         int mPosX = 0, mPosY = 0;
         int mVelX = 0, mVelY = 0;
@@ -80,8 +80,9 @@ int main(int, char*[])
     bool quit = false;
     SDL_Event e;
 
-    Dot dot(0, 0);
+    Dot dot(Dot::DOT_WIDTH/2, Dot::DOT_HEIGHT/2);
     Dot otherDot(SCREEN_WIDTH/4, SCREEN_HEIGHT/4);
+    SDL_Rect wall = {300, 40, 40, 400};
 
     while (!quit) {
         while (SDL_PollEvent(&e)) {
@@ -111,7 +112,7 @@ int main(int, char*[])
             }
             dot.handleEvent(e);
         }
-        dot.move(otherDot.getColliders());
+        dot.move(wall, otherDot.getColliders());
 
 //        sprintf(szBuffer, "SDL2Tutorial - VEL : %d", Dot::DOT_VEL);
 //        SDL_SetWindowTitle(gWindow, szBuffer);
@@ -123,6 +124,9 @@ int main(int, char*[])
 
         dot.render();
         otherDot.render();
+
+        SDL_SetRenderDrawColor(gRenderer, 0, 0, 0, 0xff);
+        SDL_RenderDrawRect(gRenderer, &wall);
 
         SDL_RenderPresent(gRenderer);
     }
@@ -229,14 +233,16 @@ void Dot::handleEvent(SDL_Event &e)
 void Dot::move(SDL_Rect &square, Circle &circle)
 {
     mPosX += mVelX;
-    mPosY += mVelY;
     shiftColliders();
-    if ( (mPosX < 0) || (mPosX + DOT_WIDTH > SCREEN_WIDTH) ||
+    if ( (mPosX - mColliders.r < 0) || (mPosX + mColliders.r > SCREEN_WIDTH) ||
           checkCollision(mColliders, circle) || checkCollision(mColliders, square) ) {
         mPosX -= mVelX;
         shiftColliders();
     }
-    if ( (mPosY < 0) || (mPosY + DOT_HEIGHT > SCREEN_HEIGHT) ||
+
+    mPosY += mVelY;
+    shiftColliders();
+    if ( (mPosY - mColliders.r < 0) || (mPosY + mColliders.r > SCREEN_HEIGHT) ||
           checkCollision(mColliders, circle) || checkCollision(mColliders, square) ) {
         mPosY -= mVelY;
         shiftColliders();
@@ -245,15 +251,11 @@ void Dot::move(SDL_Rect &square, Circle &circle)
 
 void Dot::shiftColliders()
 {
-    int r = 0;
-    for (unsigned set = 0; set < mColliders.size(); ++set) {
-        mColliders[set].x = mPosX + (DOT_WIDTH - mColliders[set].w) / 2;
-        mColliders[set].y = mPosY + r;
-        r += mColliders[set].h;
-    }
+    mColliders.x = mPosX;
+    mColliders.y = mPosY;
 }
 
-std::vector<SDL_Rect> &Dot::getColliders()
+Circle &Dot::getColliders()
 {
     return mColliders;
 }
@@ -261,12 +263,6 @@ std::vector<SDL_Rect> &Dot::getColliders()
 void Dot::render()
 {
     gDotTexture.render(mPosX - mColliders.r, mPosY - mColliders.r);
-}
-
-void Dot::outline()
-{
-    SDL_Rect rectOutline = {mPosX, mPosY, DOT_WIDTH, DOT_HEIGHT};
-    SDL_RenderDrawRect(gRenderer, &rectOutline);
 }
 
 bool loadMedia()
@@ -280,17 +276,50 @@ bool loadMedia()
 
 bool checkCollision(Circle &a, Circle &b) 
 {
-    int rSq = a.r + b.r;
-    rSq *= rSq;
+    int rSq = (a.r + b.r)*(a.r + b.r);
     if (distanceSquared(a.x, a.y, b.x, b.y) < rSq) {
         return true;
     }
     return false;
 }
 
+bool _checkCollision(Circle &a, SDL_Rect &b)
+{
+    if ( (a.x + a.r > b.x) && (a.x - a.r < b.x + b.w) &&
+         (a.y + a.r > b.y) && (a.y - a.r < b.y + b.h) )
+        return true;
+    return false;
+}
+
 bool checkCollision(Circle &a, SDL_Rect &b)
 {
+    int cX, cY;
+    if (a.x < b.x) {
+        cX = b.x;
+    } else if (a.x > b.x + b.w) {
+        cX = b.x + b.w;
+    } else {
+        cX = a.x;
+    }
+//    if (a.y < b.y) {
+//        cY = b.y;
+//    } else if (a.y > b.y + b.h) {
+//        cY = b.y + b.h;
+//    } else {
+//        cY = a.y;
+//    }
+    cY = (a.y < b.y) ? b.y : ( (a.y > b.y + b.h) ? ( b.y + b.h ) : a.y );
+    if (distanceSquared(a.x, a.y, cX, cY) < a.r*a.r) {
+        return true;
+    }
     return false;
+}
+
+double distanceSquared(int x1, int y1, int x2, int y2)
+{
+    int ans = 0;
+    ans = (x2 - x1)*(x2 - x1) + (y2 - y1)*(y2 - y1);
+    return ans;
 }
 
 bool init()
