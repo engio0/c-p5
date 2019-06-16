@@ -1,0 +1,4 @@
+D:/Dev/primer/31_scrolling_backgrounds/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/31_scrolling_backgrounds/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/31_scrolling_backgrounds/CMakeFiles/edit_cache.dir
+D:/Dev/primer/31_scrolling_backgrounds/CMakeFiles/rebuild_cache.dir
