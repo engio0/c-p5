@@ -44,10 +44,83 @@ int main(int, char**)
 
     SDL_Color textColor = {0, 0, 0, 255};
     std::string inputText = "Some Text";
+    LTexture inputTextTexture;
+    LTexture promptTextTexture;
+    inputTextTexture.loadFromRenderedText(inputText, textColor);
+    promptTextTexture.loadFromRenderedText("Enter Text : ", textColor);
+    SDL_StartTextInput();
 
     bool quit = false;
     SDL_Event e;
 
+    while (!quit) {
+        bool renderText = false;
+        while (SDL_PollEvent(&e)) {
+            switch (e.type) {
+                case SDL_QUIT:
+                    quit = true;
+                    break;
+                case SDL_KEYDOWN:
+                    switch (e.key.keysym.sym) {
+                        case SDLK_q:
+                        case SDLK_w:
+                            if (SDL_GetModState() & KMOD_CTRL) {
+                                quit = true;
+                                break;
+                            }
+                            break;
+                        case SDLK_BACKSPACE:
+                        case SDLK_KP_BACKSPACE:
+                            if (inputText.size() > 0) {
+                                inputText.pop_back();
+                                renderText = true;
+                            }
+                            break;
+                        case SDLK_c:
+                            if (SDL_GetModState() & KMOD_CTRL) {
+                                SDL_SetClipboardText(inputText.c_str());
+                            }
+                            break;
+                        case SDLK_v:
+                            if (SDL_GetModState() & KMOD_CTRL) {
+                                inputText = SDL_GetClipboardText();
+                                renderText = true;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case SDL_TEXTINPUT:
+                    inputText += e.text.text;
+                    renderText = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        if (renderText) {
+            if  (inputText != "") {
+                inputTextTexture.loadFromRenderedText(inputText, textColor);
+            } else {
+                inputTextTexture.loadFromRenderedText(" ", textColor);
+            }
+        }
+
+        SDL_SetRenderDrawColor(gRenderer, 0xff, 0xff, 0xff, 0xff);
+        SDL_RenderClear(gRenderer);
+
+        promptTextTexture.render((SCREEN_WIDTH - promptTextTexture.getWidth())/2, 0);
+        inputTextTexture.render((SCREEN_WIDTH - inputTextTexture.getWidth())/2, promptTextTexture.getHeight());
+
+        SDL_RenderPresent(gRenderer);
+    }
+
+    SDL_DestroyRenderer(gRenderer);
+    SDL_DestroyWindow(gWindow);
+    TTF_Quit();
+    SDL_Quit();
 
     return 0;
 }

@@ -1,0 +1,4 @@
+D:/Dev/primer/33_file_reading_and_writing/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/33_file_reading_and_writing/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/33_file_reading_and_writing/CMakeFiles/edit_cache.dir
+D:/Dev/primer/33_file_reading_and_writing/CMakeFiles/rebuild_cache.dir
