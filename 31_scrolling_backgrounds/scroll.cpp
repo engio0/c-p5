@@ -31,9 +31,7 @@ class Dot
         static const int DOT_VEL = 10;
         void handleEvent(SDL_Event &e);
         void move();
-        void render(int camX, int camY);
-        int getPosX() { return mPosX; }
-        int getPosY() { return mPosY; }
+        void render();
     private:
         int mPosX = 0, mPosY = 0;
         int mVelX = 0, mVelY = 0;
@@ -71,7 +69,7 @@ int main(int, char*[])
 
     Dot dot;
 
-    SDL_Rect camera = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
+    int scrollingOffset = 0;
 
     while (!quit) {
         while (SDL_PollEvent(&e)) {
@@ -103,22 +101,19 @@ int main(int, char*[])
         }
         dot.move();
 
-        camera.x = (dot.getPosX() + Dot::DOT_WIDTH/2) - SCREEN_WIDTH/2;
-        camera.y = (dot.getPosY() + Dot::DOT_HEIGHT/2) - SCREEN_HEIGHT/2;
-
-        if (camera.x < 0) camera.x = 0;
-        if (camera.y < 0) camera.y = 0;
-        if (camera.x > LEVEL_WIDTH - camera.w) camera.x = LEVEL_WIDTH - camera.w;
-        if (camera.y > LEVEL_HEIGHT - camera.h) camera.y = LEVEL_HEIGHT - camera.h;
+        --scrollingOffset;
+        if (scrollingOffset < -gBackground.getWidth())
+            scrollingOffset = 0;
 
         SDL_SetRenderDrawColor(gRenderer, 0xff, 0xff, 0xff, 0xff);
         SDL_RenderClear(gRenderer);
 
-        gBackground.render(0, 0, &camera);
-        dot.render(camera.x, camera.y);
+        gBackground.render(scrollingOffset, 0);
+        gBackground.render(scrollingOffset + gBackground.getWidth(), 0);
 
-        sprintf(szBuffer, "SDL2 Test - x : %4d, y : %3d, camX : %4d, camY : %3d",
-                dot.getPosX(), dot.getPosY(), camera.x, camera.y);
+        dot.render();
+
+        sprintf(szBuffer, "SDL2 Test - scrollingOffset : %4d", scrollingOffset);
         SDL_SetWindowTitle(gWindow, szBuffer);
 
         SDL_RenderPresent(gRenderer);
@@ -216,18 +211,18 @@ void Dot::handleEvent(SDL_Event &e)
 void Dot::move()
 {
     mPosX += mVelX;
-    if ( (mPosX < 0) || (mPosX + DOT_WIDTH > LEVEL_WIDTH) ) {
+    if ( (mPosX < 0) || (mPosX + DOT_WIDTH > SCREEN_WIDTH) ) {
         mPosX -= mVelX;
     }
     mPosY += mVelY;
-    if ( (mPosY < 0) || (mPosY + DOT_HEIGHT > LEVEL_HEIGHT) ) {
+    if ( (mPosY < 0) || (mPosY + DOT_HEIGHT > SCREEN_HEIGHT) ) {
         mPosY -= mVelY;
     }
 }
 
-void Dot::render(int camX, int camY)
+void Dot::render()
 {
-    gDotTexture.render(mPosX - camX, mPosY - camY);
+    gDotTexture.render(mPosX, mPosY);
 }
 
 bool loadMedia()
