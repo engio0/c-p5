@@ -1,0 +1,4 @@
+D:/Dev/primer/35_window_events/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/35_window_events/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/35_window_events/CMakeFiles/edit_cache.dir
+D:/Dev/primer/35_window_events/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,3 @@
+D:/Dev/primer/wxWidgets/CMakeFiles/wxWidgetsTest.dir
+D:/Dev/primer/wxWidgets/CMakeFiles/edit_cache.dir
+D:/Dev/primer/wxWidgets/CMakeFiles/rebuild_cache.dir
