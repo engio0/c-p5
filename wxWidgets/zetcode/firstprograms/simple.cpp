@@ -1,7 +1,7 @@
 #include "simple.h"
 
 Simple::Simple(const wxString& title)
-       : wxFrame(NULL, wxID_ANY, title, wxdefaultposition, wxSize(250, 150))
+       : wxFrame(NULL, wxID_ANY, title, wxDefaultPosition, wxSize(250, 150))
 {
     Centre();
 }
