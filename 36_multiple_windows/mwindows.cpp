@@ -20,7 +20,7 @@ class LWindow
     private:
         SDL_Window *mWindow = NULL;
         SDL_Renderer *mRenderer = NULL;
-        int mWindowID = 0;
+        Uint32 mWindowID = 0;
 
         int mWidth = 0;
         int mHeight = 0;
