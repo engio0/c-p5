@@ -1,0 +1,4 @@
+D:/Dev/primer/38_particle_engines/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/38_particle_engines/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/38_particle_engines/CMakeFiles/edit_cache.dir
+D:/Dev/primer/38_particle_engines/CMakeFiles/rebuild_cache.dir
