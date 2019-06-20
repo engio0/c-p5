@@ -24,25 +24,10 @@ class LTexture
         int mWidth = 0, mHeight = 0;
 };
 
-class Dot
-{
-    public:
-        static const int DOT_WIDTH = 20, DOT_HEIGHT = 20;
-        static const int DOT_VEL = 10;
-        void handleEvent(SDL_Event &e);
-        void move();
-        void render(int camX, int camY);
-        int getPosX() { return mPosX; }
-        int getPosY() { return mPosY; }
-    private:
-        int mPosX = 0, mPosY = 0;
-        int mVelX = 0, mVelY = 0;
-};
-
 class Particle
 {
     public:
-        Particle(int x, int y) : mPosX{x}, mPosY{y} {}
+        Particle(int x, int y);
         void render();
         bool isDead();
     private:
@@ -51,11 +36,31 @@ class Particle
         LTexture *mTexture;
 };
 
+class Dot
+{
+    public:
+        static const int DOT_WIDTH = 20, DOT_HEIGHT = 20;
+        static const int DOT_VEL = 10;
+        Dot();
+        ~Dot();
+        void handleEvent(SDL_Event &e);
+        void move();
+        void render();
+//        int getPosX() { return mPosX; }
+//        int getPosY() { return mPosY; }
+    private:
+        static const int TOTAL_PARTICLES = 20;
+        Particle *particles[TOTAL_PARTICLES];
+        void renderParticles();
+        int mPosX = 0, mPosY = 0;
+        int mVelX = 0, mVelY = 0;
+};
+
 SDL_Window *gWindow = NULL;
 SDL_Renderer *gRenderer = NULL;
-LTexture gDotTexture;
+LTexture gDotTexture, gRedTexture, gGreenTexture, gBlueTexture, gShimmerTexture;
 const int SCREEN_WIDTH = 640, SCREEN_HEIGHT = 480;
-const int TOTAL_PARTICLES = 20;
+//const int TOTAL_PARTICLES = 20;
 
 int main(int, char**)
 {
@@ -123,6 +128,21 @@ void LTexture::render(int x, int y, SDL_Rect *clip, double angle, SDL_Point *cen
     SDL_RenderCopyEx(gRenderer, mTexture, clip, &destRect, angle, center, flip);
 }
 
+Dot::Dot()
+{
+    mPosX = 0; mPosY = 0; mVelX = 0; mVelY = 0;
+    for (int i = 0; i < TOTAL_PARTICLES; ++i) {
+        particles[i] = new Particle(mPosX, mPosY);
+    }
+}
+
+Dot::~Dot()
+{
+    for (int i = 0; i < TOTAL_PARTICLES; ++i) {
+        delete particles[i];
+    }
+}
+
 void Dot::handleEvent(SDL_Event &e)
 {
     if (e.type == SDL_KEYDOWN && e.key.repeat == 0) {
@@ -159,9 +179,9 @@ void Dot::move()
     }
 }
 
-void Dot::render(int camX, int camY)
+void Dot::render()
 {
-    gDotTexture.render(mPosX - camX, mPosY - camY);
+    gDotTexture.render(mPosX, mPosY);
 }
 
 bool loadMedia()
@@ -252,3 +272,31 @@ void close()
 #endif
     SDL_Quit();
 }
+
+Particle::Particle(int x, int y)
+{
+    mPosX = x - 5 + (rand() % 25);
+    mPosY = y - 5 + (rand() % 25);
+    mFrame = rand() % 5;
+    switch (rand() % 3) {
+        case 0: mTexture = &gRedTexture; break;
+        case 1: mTexture = &gGreenTexture; break;
+        case 2: mTexture = &gBlueTexture; break;
+    }
+}
+
+void Particle::render()
+{
+    mTexture->render(mPosX, mPosY);
+    if (mFrame % 2 == 0) {
+        gShimmerTexture.render(mPosX,mPosY);
+    }
+    ++mFrame;
+}
+
+bool Particle::isDead()
+{
+    return (mFrame > 10);
+}
+
+
