@@ -56,6 +56,10 @@ class Dot
         int mVelX = 0, mVelY = 0;
 };
 
+bool init();
+bool loadMedia();
+void close();
+
 SDL_Window *gWindow = NULL;
 SDL_Renderer *gRenderer = NULL;
 LTexture gDotTexture, gRedTexture, gGreenTexture, gBlueTexture, gShimmerTexture;
@@ -64,6 +68,47 @@ const int SCREEN_WIDTH = 640, SCREEN_HEIGHT = 480;
 
 int main(int, char**)
 {
+    if (!init()) {
+        printf("main::init failed!\n");
+        return 1;
+    }
+    if (!loadMedia()) {
+        printf("main::loadMedia failed!\n");
+        return 1;
+    }
+
+    
+    bool quit = false;
+    SDL_Event e;
+    Dot dot;
+
+    while (!quit) {
+        while (SDL_PollEvent(&e)) {
+            switch (e.type) {
+                case SDL_QUIT:
+                    quit = true;
+                    break;
+                case SDL_KEYDOWN:
+                    switch (e.key.keysym.sym) {
+                        case SDLK_q:
+                            quit = true;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            dot.handleEvent(e);
+        }
+        dot.move();
+        SDL_SetRenderDrawColor(gRenderer, 0xff, 0xff, 0xff, 0xff);
+        SDL_RenderClear(gRenderer);
+        dot.render();
+        SDL_RenderPresent(gRenderer);
+    }
+    close();
     return 0;
 }
 
@@ -182,6 +227,19 @@ void Dot::move()
 void Dot::render()
 {
     gDotTexture.render(mPosX, mPosY);
+    renderParticles();
+}
+
+void Dot::renderParticles()
+{
+    for (int i = 0; i < TOTAL_PARTICLES; ++i) {
+        if (particles[i]->isDead()) {
+            delete particles[i];
+            particles[i] = new Particle(mPosX, mPosY);
+        }
+        particles[i]->render();
+    }
+
 }
 
 bool loadMedia()
@@ -190,6 +248,26 @@ bool loadMedia()
         printf("Error opening dot.bmp!\n");
         return false;
     }
+    if (!gRedTexture.loadFromFile("./red.bmp")) {
+        printf("Error opening red.bmp!\n");
+        return false;
+    }
+    if (!gGreenTexture.loadFromFile("./green.bmp")) {
+        printf("Error opening green.bmp!\n");
+        return false;
+    }
+    if (!gBlueTexture.loadFromFile("./blue.bmp")) {
+        printf("Error opening blue.bmp!\n");
+        return false;
+    }
+    if (!gShimmerTexture.loadFromFile("./shimmer.bmp")) {
+        printf("Error opening shimmer.bmp!\n");
+        return false;
+    }
+    gRedTexture.setAlpha(192);
+    gGreenTexture.setAlpha(192);
+    gBlueTexture.setAlpha(192);
+    gShimmerTexture.setAlpha(192);
 //    if (!gBackground.loadFromFile("./bg.png")) {
 //        printf("Error opening bg.bmp!\n");
 //        return false;
