@@ -95,6 +95,18 @@ void Tile::render(SDL_Rect &camera)
     }
 }
 
+void Dot::move(Tile *tiles[])
+{
+    mBox.x += mVelX;
+    if ((mBox.x < 0) || (mBox.x + DOT_WIDTH > LEVEL_WIDTH) || touchesWall(mBox, tiles)) {
+        mBox.x -= mVelX;
+    }
+    mBox.y += mVelY;
+    if ((mBox.y < 0) || (mBox.y + DOT_HEIGHT > LEVEL_HEIGHT) || touchesWall(mBox, tiles)) {
+        mBox.y -= mVelY;
+    }
+}
+
 void LTexture::free()
 {
     if (mTexture) {
