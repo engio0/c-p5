@@ -1,0 +1,4 @@
+D:/Dev/primer/39_tiling/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/39_tiling/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/39_tiling/CMakeFiles/edit_cache.dir
+D:/Dev/primer/39_tiling/CMakeFiles/rebuild_cache.dir
