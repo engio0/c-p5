@@ -44,7 +44,7 @@ SDL_Renderer *gRenderer = NULL;
 
 int main(int, char**)
 {
-    setbuf(stdout, NULL);
+    setvbuf(stdout, NULL, _IONBF, 0);
 
     printf("entering main...\n");
     if (!init()) {
@@ -107,11 +107,17 @@ void LTexture::free()
 bool LTexture::loadFromFile(std::string path)
 {
     free();
-    SDL_Surface *tmpSurface = IMG_Load(path.c_str());
-    if (!tmpSurface) {
+    SDL_Surface *loadedSurface = IMG_Load(path.c_str());
+    if (!loadedSurface) {
         printf("IMG_Load failed opening file %s! IMG_Error: %s\n", path.c_str(), IMG_GetError());
         return false;
     }
+    SDL_Surface *formattedSurface = SDL_ConvertSurfaceFormat(loadedSurface, SDL_GetWindowPixelFormat(gWindow), 0);
+    if (!formattedSurface) {
+        printf("Unable to convert loaded surface to display format! SDL Error: %s\n", SDL_GetError());
+        return false;
+    }
+
     SDL_SetColorKey(tmpSurface, SDL_TRUE, SDL_MapRGB(tmpSurface->format, 0, 255, 255));
     mTexture = SDL_CreateTextureFromSurface(gRenderer, tmpSurface);
     if (!mTexture) {
@@ -120,7 +126,8 @@ bool LTexture::loadFromFile(std::string path)
     }
     mWidth = tmpSurface->w;
     mHeight = tmpSurface->h;
-    SDL_FreeSurface(tmpSurface);
+    SDL_FreeSurface(formattedSurface);
+    SDL_FreeSurface(loadedSurface);
     return true;
 }
 
@@ -257,105 +264,7 @@ bool loadMedia()
     return true;
 }
 
-bool setTiles()
-{
-#ifdef _LOG_
-    printf("entering setTiles...\n");
-#endif
-    std::ifstream map("./lazy.map");
-    if (map.fail()) {
-        printf("Unable to load map file!\n");
-        return false;
-    }
-#ifdef _LOG_
-    printf("after ifstream initialize...\n");
-#endif
-    int tileType = -1;
-    for (int y = 0; y < LEVEL_HEIGHT / TILE_HEIGHT; ++y) {
-        for (int x = 0; x < LEVEL_WIDTH / TILE_WIDTH; ++x) {
-            map >> tileType;
-#ifdef _LOG_
-            printf("data x: %4d, y: %3d, value: %3d\n", x, y, tileType);
-#endif
-            if (map.fail()) {
-                printf("Error loading map: Unexpected end of file!\n");
-                return false;
-            }
-            if (tileType < 0 || tileType >= TOTAL_TILE_SPRITES) {
-                printf("Error loading map: Invalid file type at x = %d, y = %d!\n", x, y);
-                return false;
-            }
-            tiles[x + y * (LEVEL_WIDTH / TILE_WIDTH)] = new Tile(x * TILE_WIDTH, y * TILE_HEIGHT, tileType);
-        }
-    }
-#ifdef _LOG_
-    printf("after reading loop...\n");
-#endif
-    map.close();
-    gTileClips[TILE_RED].x = 0;
-    gTileClips[TILE_RED].y = 0;
-    gTileClips[TILE_RED].w = TILE_WIDTH;
-    gTileClips[TILE_RED].h = TILE_HEIGHT;
-
-    gTileClips[TILE_GREEN].x = 0;
-    gTileClips[TILE_GREEN].y = 80;
-    gTileClips[TILE_GREEN].w = TILE_WIDTH;
-    gTileClips[TILE_GREEN].h = TILE_HEIGHT;
-
-    gTileClips[TILE_BLUE].x = 0;
-    gTileClips[TILE_BLUE].y = 160;
-    gTileClips[TILE_BLUE].w = TILE_WIDTH;
-    gTileClips[TILE_BLUE].h = TILE_HEIGHT;
-
-    gTileClips[TILE_TOPLEFT].x = 80;
-    gTileClips[TILE_TOPLEFT].y = 0;
-    gTileClips[TILE_TOPLEFT].w = TILE_WIDTH;
-    gTileClips[TILE_TOPLEFT].h = TILE_HEIGHT;
-
-    gTileClips[TILE_LEFT].x = 80;
-    gTileClips[TILE_LEFT].y = 80;
-    gTileClips[TILE_LEFT].w = TILE_WIDTH;
-    gTileClips[TILE_LEFT].h = TILE_HEIGHT;
-
-    gTileClips[TILE_BOTTOMLEFT].x = 80;
-    gTileClips[TILE_BOTTOMLEFT].y = 160;
-    gTileClips[TILE_BOTTOMLEFT].w = TILE_WIDTH;
-    gTileClips[TILE_BOTTOMLEFT].h = TILE_HEIGHT;
-
-    gTileClips[TILE_TOP].x = 160;
-    gTileClips[TILE_TOP].y = 0;
-    gTileClips[TILE_TOP].w = TILE_WIDTH;
-    gTileClips[TILE_TOP].h = TILE_HEIGHT;
-
-    gTileClips[TILE_CENTER].x = 160;
-    gTileClips[TILE_CENTER].y = 80;
-    gTileClips[TILE_CENTER].w = TILE_WIDTH;
-    gTileClips[TILE_CENTER].h = TILE_HEIGHT;
-
-    gTileClips[TILE_BOTTOM].x = 160;
-    gTileClips[TILE_BOTTOM].y = 160;
-    gTileClips[TILE_BOTTOM].w = TILE_WIDTH;
-    gTileClips[TILE_BOTTOM].h = TILE_HEIGHT;
-
-    gTileClips[TILE_TOPRIGHT].x = 240;
-    gTileClips[TILE_TOPRIGHT].y = 0;
-    gTileClips[TILE_TOPRIGHT].w = TILE_WIDTH;
-    gTileClips[TILE_TOPRIGHT].h = TILE_HEIGHT;
-
-    gTileClips[TILE_RIGHT].x = 240;
-    gTileClips[TILE_RIGHT].y = 80;
-    gTileClips[TILE_RIGHT].w = TILE_WIDTH;
-    gTileClips[TILE_RIGHT].h = TILE_HEIGHT;
-
-    gTileClips[TILE_BOTTOMRIGHT].x = 240;
-    gTileClips[TILE_BOTTOMRIGHT].y = 160;
-    gTileClips[TILE_BOTTOMRIGHT].w = TILE_WIDTH;
-    gTileClips[TILE_BOTTOMRIGHT].h = TILE_HEIGHT;
-
-    return true;
-}
-
-void close(Tile *tiles[])
+void close()
 {
 //    gPromptTexture.free();
 
@@ -366,13 +275,6 @@ void close(Tile *tiles[])
 //
 //    Mix_FreeMusic(gMusic);
 
-    for (int i = 0; i < TOTAL_TILES; ++i) {
-        delete tiles[i];
-        tiles[i] = NULL;
-    }
-
-    gTileTexture.free();
-    gDotTexture.free();
 
 #ifdef SDL_TTF_H_
     TTF_CloseFont(gFont);
@@ -393,16 +295,4 @@ bool checkCollision(SDL_Rect &a, SDL_Rect &b)
     if ( (a.x >= b.x + b.w) || (b.x >= a.x + a.w) ||
          (a.y >= b.y + b.h) || (b.y >= a.y + a.h) ) return false;
     return true;
-}
-
-bool touchesWall(SDL_Rect &box, Tile *tiles[])
-{
-    for (int i = 0; i < TOTAL_TILES; ++i) {
-        if (tiles[i]->getType() > TILE_BLUE) {
-            if (checkCollision(box, tiles[i]->getBox())) {
-                return true;
-            }
-        }
-    }
-    return false;
 }
