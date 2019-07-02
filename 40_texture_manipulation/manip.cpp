@@ -66,6 +66,7 @@ int main(int, char**)
     printf("main::loadMedia successful!\n");
 #endif
 
+    int xPos = (SCREEN_WIDTH - gFooTexture.getWidth())/2, yPos = (SCREEN_HEIGHT - gFooTexture.getHeight())/2;
     bool quit = false;
     SDL_Event e;
     while (!quit) {
@@ -79,6 +80,32 @@ int main(int, char**)
                         case SDLK_q:
                             quit = true;
                             break;
+                        case SDLK_r:
+                            if (!loadMedia()) {
+                                printf("main::loadMedia failed!\n");
+                                return 2;
+                            }
+                            break;
+                        case SDLK_LEFT:
+                            //xPos -= 1;
+                            //break;
+                        case SDLK_RIGHT:
+                            //xPos += 1;
+                            //break;
+                        case SDLK_UP:
+                            //yPos -= 1;
+                            //break;
+                        case SDLK_DOWN:
+                            //yPos += 1;
+                            //break;
+                        //{
+                        //    const Uint8 *state = SDL_GetKeyboardState(NULL);
+                        //    if (state[SDL_SCANCODE_LEFT]) --xPos;
+                        //    if (state[SDL_SCANCODE_RIGHT]) ++xPos;
+                        //    if (state[SDL_SCANCODE_UP]) --yPos;
+                        //    if (state[SDL_SCANCODE_DOWN]) ++yPos;
+                        //}
+                        break;
                         default:
                             break;
                     }
@@ -87,11 +114,17 @@ int main(int, char**)
                     break;
             }
         }
+                        {
+                            const Uint8 *state = SDL_GetKeyboardState(NULL);
+                            if (state[SDL_SCANCODE_LEFT]) --xPos;
+                            if (state[SDL_SCANCODE_RIGHT]) ++xPos;
+                            if (state[SDL_SCANCODE_UP]) --yPos;
+                            if (state[SDL_SCANCODE_DOWN]) ++yPos;
+                        }
         SDL_SetRenderDrawColor(gRenderer, 0xff, 0xff, 0xff, 0xff);
         SDL_RenderClear(gRenderer);
 
-        gFooTexture.render((SCREEN_WIDTH - gFooTexture.getWidth())/2,
-                           (SCREEN_HEIGHT - gFooTexture.getHeight())/2);
+        gFooTexture.render(xPos, yPos);
 
         SDL_RenderPresent(gRenderer);
     }
