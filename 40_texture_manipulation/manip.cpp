@@ -1,6 +1,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include <cstdio>
+#include <cstdlib>
 #include <string>
 #include <fstream>
 
@@ -89,7 +90,8 @@ int main(int, char**)
         SDL_SetRenderDrawColor(gRenderer, 0xff, 0xff, 0xff, 0xff);
         SDL_RenderClear(gRenderer);
 
-        gFooTexture.render(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+        gFooTexture.render((SCREEN_WIDTH - gFooTexture.getWidth())/2,
+                           (SCREEN_HEIGHT - gFooTexture.getHeight())/2);
 
         SDL_RenderPresent(gRenderer);
     }
@@ -301,6 +303,9 @@ bool loadMedia()
     for (int i = 0; i < pixelCount; ++i) {
         if (pixels[i] == colorkey) {
             pixels[i] = tranparent;
+        }
+        else {
+            pixels[i] = SDL_MapRGB(mappingFormat, rand()%256, rand()%256, rand()%256);
         }
     }
     gFooTexture.unlockTexture();

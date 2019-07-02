@@ -13,6 +13,8 @@ SDL_image.h
 -
 cstdio
 -
+cstdlib
+-
 string
 -
 fstream
