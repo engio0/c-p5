@@ -1,0 +1,4 @@
+D:/Dev/primer/40_texture_manipulation/CMakeFiles/SDL2Test.dir
+D:/Dev/primer/40_texture_manipulation/CMakeFiles/SDL2Tutorial.dir
+D:/Dev/primer/40_texture_manipulation/CMakeFiles/edit_cache.dir
+D:/Dev/primer/40_texture_manipulation/CMakeFiles/rebuild_cache.dir

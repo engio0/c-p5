@@ -1,9 +1,9 @@
-#include <iostream>
+#include <cstdio>
 
 int main()
 {
-    if (1)
-        std::cout << "1 is true\n";
-    else
-        std::cout << "1 is false\n";
+    for (int i = -3; i <= 3; ++i) {
+        printf("%2d : %s\n", i, ( i ? "true" : "false" ));
+    }
+    return 0;
 }

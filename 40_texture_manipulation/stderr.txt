@@ -1,0 +1,3 @@
+entering main...
+Failed to load corner texture!
+main::loadMedia failed!

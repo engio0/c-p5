@@ -368,7 +368,7 @@ bool loadMedia()
 	bool success = true;
 
 	//Load foo' texture
-	if( !gFooTexture.loadFromFile( "40_texture_manipulation/foo.png" ) )
+	if( !gFooTexture.loadFromFile( "foo.png" ) )
 	{
 		printf( "Failed to load corner texture!\n" );
 		success = false;

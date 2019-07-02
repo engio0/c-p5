@@ -25,8 +25,8 @@ class LTexture
         // Pixel manipulators
         bool lockTexture();
         bool unlockTexture();
-        void* getPixels();
-        int getPitch();
+        void* getPixels() { return mPixels; }
+        int getPitch() { return mPitch; }
     private:
         SDL_Texture *mTexture = NULL;
         int mWidth = 0, mHeight = 0;
@@ -41,6 +41,8 @@ bool checkCollision(SDL_Rect &a, SDL_Rect &b);
 
 SDL_Window *gWindow = NULL;
 SDL_Renderer *gRenderer = NULL;
+
+LTexture gFooTexture;
 
 int main(int, char**)
 {
@@ -87,6 +89,8 @@ int main(int, char**)
         SDL_SetRenderDrawColor(gRenderer, 0xff, 0xff, 0xff, 0xff);
         SDL_RenderClear(gRenderer);
 
+        gFooTexture.render(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+
         SDL_RenderPresent(gRenderer);
     }
 
@@ -117,18 +121,29 @@ bool LTexture::loadFromFile(std::string path)
         printf("Unable to convert loaded surface to display format! SDL Error: %s\n", SDL_GetError());
         return false;
     }
-
-    SDL_SetColorKey(tmpSurface, SDL_TRUE, SDL_MapRGB(tmpSurface->format, 0, 255, 255));
-    mTexture = SDL_CreateTextureFromSurface(gRenderer, tmpSurface);
-    if (!mTexture) {
-        printf("SDL_CreateTextureFromSurface failed!\n");
+    SDL_Texture* newTexture = SDL_CreateTexture(gRenderer, SDL_GetWindowPixelFormat(gWindow),
+                        SDL_TEXTUREACCESS_STREAMING, formattedSurface->w, formattedSurface->h);
+    if (!newTexture) {
+        printf("Unable to create blank texture! SDL Error: %s\n", SDL_GetError());
         return false;
     }
-    mWidth = tmpSurface->w;
-    mHeight = tmpSurface->h;
+    if (SDL_LockTexture(newTexture, NULL, &mPixels, &mPitch) < 0) {
+        printf("loadFromFile: Unable to lock texture! SDL Error: %s\n", SDL_GetError());
+        return false;
+    }
+    memcpy(mPixels, formattedSurface->pixels, formattedSurface->pitch * formattedSurface->h);
+    SDL_UnlockTexture(newTexture);
+    mPixels = NULL;
+
+    mWidth = formattedSurface->w;
+    mHeight = formattedSurface->h;
+
     SDL_FreeSurface(formattedSurface);
     SDL_FreeSurface(loadedSurface);
-    return true;
+
+    mTexture = newTexture;
+
+    return mTexture != NULL;
 }
 
 #ifdef SDL_TTF_H_
@@ -151,6 +166,36 @@ bool LTexture::loadFromRenderedText(std::string text, SDL_Color color)
     return true;
 }
 #endif
+
+bool LTexture::lockTexture()
+{
+    if (mPixels) {
+        printf("Texture is already locked!\n");
+        return false;
+    }
+    if (!mTexture) {
+        printf("LTexture::lockTexture: mTexture is NULL!\n");
+        return false;
+    }
+    if (SDL_LockTexture(mTexture, NULL, &mPixels, &mPitch)) {
+        printf("LTexture::lockTexture: Unable to lock texture! SDL Error: %s\n", SDL_GetError());
+        return false;
+    }
+    return true;
+}
+
+bool LTexture::unlockTexture()
+{
+    if (!mPixels) {
+        printf("Texture is not locked!\n");
+        return false;
+    }
+    SDL_UnlockTexture(mTexture);
+    mPixels = NULL;
+    mPitch = 0;
+
+    return true;
+}
 
 void LTexture::render(int x, int y, SDL_Rect *clip, double angle, SDL_Point *center, SDL_RendererFlip flip)
 {
@@ -239,28 +284,28 @@ bool init()
 
 bool loadMedia()
 {
-//     if (!gDotTexture.loadFromFile("./dot.bmp")) {
-//         printf("Failed to load dot texture!\n");
-//         return false;
-//     }
-// #ifdef _LOG_
-//     printf("loadMedia::loadFromFile dot.bmp successful!\n");
-// #endif
-//     if (!gTileTexture.loadFromFile("./tiles.png")) {
-//         printf("Failed to load tile set texture!\n");
-//         return false;
-//     }
-// #ifdef _LOG_
-//     printf("loadMedia::loadFromFile tiles.png successful!\n");
-// #endif
-//     if (!setTiles(tiles)) {
-//         printf("Failed to load tile set!\n");
-//         return false;
-//     }
-// #ifdef _LOG_
-//     printf("loadMedia::setTiles successful!\n");
-// #endif
-// 
+    if (!gFooTexture.loadFromFile("./foo.png")) {
+        printf("Failed to load corner texture!\n");
+        return false;
+    }
+    if (!gFooTexture.lockTexture()) {
+        printf("Unable to lock Foo!\n");
+        return false;
+    }
+    SDL_PixelFormat* mappingFormat = SDL_AllocFormat(SDL_GetWindowPixelFormat(gWindow));
+    Uint32* pixels = (Uint32*)gFooTexture.getPixels();
+    int pixelCount = ( gFooTexture.getPitch() / 4 ) * gFooTexture.getHeight();
+    Uint32 colorkey = SDL_MapRGB(mappingFormat, 0, 0xff, 0xff);
+    Uint32 tranparent = SDL_MapRGBA(mappingFormat, 0xff, 0xff, 0xff, 0x00);
+
+    for (int i = 0; i < pixelCount; ++i) {
+        if (pixels[i] == colorkey) {
+            pixels[i] = tranparent;
+        }
+    }
+    gFooTexture.unlockTexture();
+    SDL_FreeFormat(mappingFormat);
+
     return true;
 }
 
