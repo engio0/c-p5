@@ -547,7 +547,7 @@ void LBitmapFont::renderText( int x, int y, std::string text )
 		int curX = x, curY = y;
 
         //Go through the text
-        for( int i = 0; i < text.length(); ++i )
+        for( size_t i = 0; i < text.length(); ++i )
         {
             //If the current character is a space
             if( text[ i ] == ' ' )
@@ -672,53 +672,63 @@ void close()
 	SDL_Quit();
 }
 
-int main( int argc, char* args[] )
+int main( int, char* [] )
 {
 	//Start up SDL and create window
 	if( !init() )
 	{
 		printf( "Failed to initialize!\n" );
+        return 1;
 	}
-	else
-	{
-		//Load media
-		if( !loadMedia() )
-		{
-			printf( "Failed to load media!\n" );
-		}
-		else
-		{	
-			//Main loop flag
-			bool quit = false;
+    //Load media
+    if( !loadMedia() )
+    {
+        printf( "Failed to load media!\n" );
+        return 1;
+    }
+    //Main loop flag
+    bool quit = false;
 
-			//Event handler
-			SDL_Event e;
+    //Event handler
+    SDL_Event e;
 
-			//While application is running
-			while( !quit )
-			{
-				//Handle events on queue
-				while( SDL_PollEvent( &e ) != 0 )
-				{
-					//User requests quit
-					if( e.type == SDL_QUIT )
-					{
-						quit = true;
-					}
-				}
+    //While application is running
+    while( !quit )
+    {
+        //Handle events on queue
+        while( SDL_PollEvent( &e ) )
+        {
+            //User requests quit
+            switch (e.type)
+            {
+                case SDL_QUIT:
+                    quit = true;
+                    break;
+                case SDL_KEYDOWN:
+                    switch (e.key.keysym.sym)
+                    {
+                        case SDLK_q:
+                            quit = true;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
 
-				//Clear screen
-				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
-				SDL_RenderClear( gRenderer );
+        //Clear screen
+        SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
+        SDL_RenderClear( gRenderer );
 
-				//Render test text
-				gBitmapFont.renderText( 0, 0, "Bitmap Font:\nABDCEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789" );
+        //Render test text
+        gBitmapFont.renderText( 0, 0, "Bitmap Font:\nABDCEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789" );
 
-				//Update screen
-				SDL_RenderPresent( gRenderer );
-			}
-		}
-	}
+        //Update screen
+        SDL_RenderPresent( gRenderer );
+    }
 
 	//Free resources and close SDL
 	close();
