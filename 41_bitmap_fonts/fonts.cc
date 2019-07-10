@@ -78,6 +78,12 @@ class LBitmapFont
 
 		//Shows the text
 		void renderText( int x, int y, std::string text );
+        
+        //Shows the table
+        void renderTable(int x, int y);
+
+        //Shows the grid
+        void renderGrid();
 
     private:
 		//The font texture
@@ -135,70 +141,66 @@ bool LTexture::loadFromFile( std::string path )
 
 	//Load image at specified path
 	SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
-	if( loadedSurface == NULL )
-	{
+	if( loadedSurface == NULL ) {
 		printf( "Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError() );
+        return false;
 	}
-	else
-	{
-		//Convert surface to display format
-		SDL_Surface* formattedSurface = SDL_ConvertSurfaceFormat( loadedSurface, SDL_PIXELFORMAT_RGBA8888, 0 );
-		if( formattedSurface == NULL )
-		{
-			printf( "Unable to convert loaded surface to display format! %s\n", SDL_GetError() );
-		}
-		else
-		{
-			//Create blank streamable texture
-			newTexture = SDL_CreateTexture( gRenderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, formattedSurface->w, formattedSurface->h );
-			if( newTexture == NULL )
-			{
-				printf( "Unable to create blank texture! SDL Error: %s\n", SDL_GetError() );
-			}
-			else
-			{
-				//Enable blending on texture
-				SDL_SetTextureBlendMode( newTexture, SDL_BLENDMODE_BLEND );
+    //Convert surface to display format
 
-				//Lock texture for manipulation
-				SDL_LockTexture( newTexture, &formattedSurface->clip_rect, &mPixels, &mPitch );
+        printf("SDL_PIXELFORMAT_RGBA8888 = %x\n", SDL_PIXELFORMAT_RGBA8888);
+        printf("SDL_GetWindowPixelFormat = %x\n", SDL_GetWindowPixelFormat(gWindow));
+        printf("loadedSurface pix format = %x\n", loadedSurface->format->format);
 
-				//Copy loaded/formatted surface pixels
-				memcpy( mPixels, formattedSurface->pixels, formattedSurface->pitch * formattedSurface->h );
+    SDL_Surface* formattedSurface = SDL_ConvertSurfaceFormat( loadedSurface, SDL_PIXELFORMAT_RGBA8888, 0 );
+    if( formattedSurface == NULL ) {
+        printf( "Unable to convert loaded surface to display format! %s\n", SDL_GetError() );
+        return false;
+    }
+    //Create blank streamable texture
+    newTexture = SDL_CreateTexture( gRenderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, formattedSurface->w, formattedSurface->h );
+    if( newTexture == NULL ) {
+        printf( "Unable to create blank texture! SDL Error: %s\n", SDL_GetError() );
+        return false;
+    }
+    //Enable blending on texture
+    SDL_SetTextureBlendMode( newTexture, SDL_BLENDMODE_BLEND );
 
-				//Get image dimensions
-				mWidth = formattedSurface->w;
-				mHeight = formattedSurface->h;
+    //Lock texture for manipulation
+    SDL_LockTexture( newTexture, &formattedSurface->clip_rect, &mPixels, &mPitch );
 
-				//Get pixel data in editable format
-				Uint32* pixels = (Uint32*)mPixels;
-				int pixelCount = ( mPitch / 4 ) * mHeight;
+    //Copy loaded/formatted surface pixels
+    memcpy( mPixels, formattedSurface->pixels, formattedSurface->pitch * formattedSurface->h );
 
-				//Map colors				
-				Uint32 colorKey = SDL_MapRGB( formattedSurface->format, 0, 0xFF, 0xFF );
-				Uint32 transparent = SDL_MapRGBA( formattedSurface->format, 0x00, 0xFF, 0xFF, 0x00 );
+    //Get image dimensions
+    mWidth = formattedSurface->w;
+    mHeight = formattedSurface->h;
 
-				//Color key pixels
-				for( int i = 0; i < pixelCount; ++i )
-				{
-					if( pixels[ i ] == colorKey )
-					{
-						pixels[ i ] = transparent;
-					}
-				}
+    //Get pixel data in editable format
+    Uint32* pixels = (Uint32*)mPixels;
+    int pixelCount = ( mPitch / 4 ) * mHeight;
 
-				//Unlock texture to update
-				SDL_UnlockTexture( newTexture );
-				mPixels = NULL;
-			}
+    //Map colors				
+    Uint32 colorKey = SDL_MapRGB( formattedSurface->format, 0, 0xFF, 0xFF );
+    Uint32 transparent = SDL_MapRGBA( formattedSurface->format, 0x00, 0xFF, 0xFF, 0x00 );
 
-			//Get rid of old formatted surface
-			SDL_FreeSurface( formattedSurface );
-		}	
+    //Color key pixels
+    for( int i = 0; i < pixelCount; ++i )
+    {
+        if( pixels[ i ] == colorKey )
+        {
+            pixels[ i ] = transparent;
+        }
+    }
+
+    //Unlock texture to update
+    SDL_UnlockTexture( newTexture );
+    mPixels = NULL;
+
+    //Get rid of old formatted surface
+    SDL_FreeSurface( formattedSurface );
 		
-		//Get rid of old loaded surface
-		SDL_FreeSurface( loadedSurface );
-	}
+    //Get rid of old loaded surface
+    SDL_FreeSurface( loadedSurface );
 
 	//Return success
 	mTexture = newTexture;
@@ -579,6 +581,16 @@ void LBitmapFont::renderText( int x, int y, std::string text )
     }
 }
 
+void LBitmapFont::renderTable(int x, int y)
+{
+    mBitmap->render(x, y);
+}
+
+void LBitmapFont::renderGrid()
+{
+    SDL_RenderDrawRects(gRenderer, mChars, 256);
+}
+
 bool init()
 {
 	//Initialization flag
@@ -725,6 +737,11 @@ int main( int, char* [] )
 
         //Render test text
         gBitmapFont.renderText( 0, 0, "Bitmap Font:\nABDCEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123456789" );
+
+        gBitmapFont.renderTable(0, 0);
+        SDL_SetRenderDrawColor(gRenderer, 0xff, 0, 0, 64);
+        gBitmapFont.renderGrid();
+        SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 
         //Update screen
         SDL_RenderPresent( gRenderer );

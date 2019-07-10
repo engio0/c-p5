@@ -1,7 +1,7 @@
 /*This source code copyrighted by Lazy Foo' Productions (2004-2019)
 and may not be redistributed without written permission.*/
 
-//Using SDL, SDL_image, standard IO, and strings
+//Using SDL, SDL_image, standard IO, and, strings
 #include <SDL.h>
 #include <SDL_image.h>
 #include <stdio.h>
@@ -30,7 +30,7 @@ class LTexture
 		#endif
 
 		//Creates blank texture
-		bool createBlank( int width, int height );
+		bool createBlank( int width, int height, SDL_TextureAccess = SDL_TEXTUREACCESS_STREAMING );
 
 		//Deallocates texture
 		void free();
@@ -46,6 +46,9 @@ class LTexture
 		
 		//Renders texture at given point
 		void render( int x, int y, SDL_Rect* clip = NULL, double angle = 0.0, SDL_Point* center = NULL, SDL_RendererFlip flip = SDL_FLIP_NONE );
+
+		//Set self as render target
+		void setAsRenderTarget();
 
 		//Gets image dimensions
 		int getWidth();
@@ -70,29 +73,6 @@ class LTexture
 		int mHeight;
 };
 
-//A test animation stream
-class DataStream
-{
-	public:
-		//Initializes internals
-		DataStream();
-
-		//Loads initial data
-		bool loadMedia();
-
-		//Deallocator
-		void free();
-
-		//Gets current frame data
-		void* getBuffer();
-
-	private:
-		//Internal data
-		SDL_Surface* mImages[ 4 ];
-		int mCurrentImage;
-		int mDelayFrames;
-};
-
 //Starts up SDL and creates window
 bool init();
 
@@ -102,6 +82,9 @@ bool loadMedia();
 //Frees media and shuts down SDL
 void close();
 
+//Our test callback function
+Uint32 callback( Uint32 interval, void* param );
+
 //The window we'll be rendering to
 SDL_Window* gWindow = NULL;
 
@@ -109,10 +92,7 @@ SDL_Window* gWindow = NULL;
 SDL_Renderer* gRenderer = NULL;
 
 //Scene textures
-LTexture gStreamingTexture;
-
-//Animation stream
-DataStream gDataStream;
+LTexture gSplashTexture;
 
 LTexture::LTexture()
 {
@@ -247,10 +227,10 @@ bool LTexture::loadFromRenderedText( std::string textureText, SDL_Color textColo
 }
 #endif
 		
-bool LTexture::createBlank( int width, int height )
+bool LTexture::createBlank( int width, int height, SDL_TextureAccess access )
 {
 	//Create uninitialized texture
-	mTexture = SDL_CreateTexture( gRenderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, width, height );
+	mTexture = SDL_CreateTexture( gRenderer, SDL_PIXELFORMAT_RGBA8888, access, width, height );
 	if( mTexture == NULL )
 	{
 		printf( "Unable to create blank texture! SDL Error: %s\n", SDL_GetError() );
@@ -310,6 +290,12 @@ void LTexture::render( int x, int y, SDL_Rect* clip, double angle, SDL_Point* ce
 
 	//Render to screen
 	SDL_RenderCopyEx( gRenderer, mTexture, clip, &renderQuad, angle, center, flip );
+}
+
+void LTexture::setAsRenderTarget()
+{
+	//Make self render target
+	SDL_SetRenderTarget( gRenderer, mTexture );
 }
 
 int LTexture::getWidth()
@@ -395,75 +381,13 @@ Uint32 LTexture::getPixel32( unsigned int x, unsigned int y )
     return pixels[ ( y * ( mPitch / 4 ) ) + x ];
 }
 
-DataStream::DataStream()
-{
-	mImages[ 0 ] = NULL;
-	mImages[ 1 ] = NULL;
-	mImages[ 2 ] = NULL;
-	mImages[ 3 ] = NULL;
-
-	mCurrentImage = 0;
-	mDelayFrames = 4;
-}
-
-bool DataStream::loadMedia()
-{
-	bool success = true;
-	
-	for( int i = 0; i < 4; ++i )
-	{
-		char path[ 64 ] = "";
-		sprintf( path, "foo_walk_%d.png", i );
-
-		SDL_Surface* loadedSurface = IMG_Load( path );
-		if( loadedSurface == NULL )
-		{
-			printf( "Unable to load %s! SDL_image error: %s\n", path, IMG_GetError() );
-			success = false;
-		}
-		else
-		{
-			mImages[ i ] = SDL_ConvertSurfaceFormat( loadedSurface, SDL_PIXELFORMAT_RGBA8888, 0 );
-		}
-
-		SDL_FreeSurface( loadedSurface );
-	}
-
-	return success;
-}
-
-void DataStream::free()
-{
-	for( int i = 0; i < 4; ++i )
-	{
-		SDL_FreeSurface( mImages[ i ] );
-	}
-}
-
-void* DataStream::getBuffer()
-{
-	--mDelayFrames;
-	if( mDelayFrames == 0 )
-	{
-		++mCurrentImage;
-		mDelayFrames = 4;
-	}
-
-	if( mCurrentImage == 4 )
-	{
-		mCurrentImage = 0;
-	}
-
-	return mImages[ mCurrentImage ]->pixels;
-}
-
 bool init()
 {
 	//Initialization flag
 	bool success = true;
 
 	//Initialize SDL
-	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
+	if (SDL_Init( SDL_INIT_VIDEO | SDL_INIT_TIMER ) < 0 )
 	{
 		printf( "SDL could not initialize! SDL Error: %s\n", SDL_GetError() );
 		success = false;
@@ -518,18 +442,11 @@ bool loadMedia()
 {
 	//Loading success flag
 	bool success = true;
-
-	//Load blank texture
-	if( !gStreamingTexture.createBlank( 64, 205 ) )
+	
+	//Load splash texture
+	if( !gSplashTexture.loadFromFile( "45_timer_callbacks/splash.png" ) )
 	{
-		printf( "Failed to create streaming texture!\n" );
-		success = false;
-	}
-
-	//Load data stream
-	if( !gDataStream.loadMedia() )
-	{		
-		printf( "Unable to load data stream!\n" );
+		printf( "Failed to load splash texture!\n" );
 		success = false;
 	}
 
@@ -539,8 +456,7 @@ bool loadMedia()
 void close()
 {
 	//Free loaded images
-	gStreamingTexture.free();
-	gDataStream.free();
+	gSplashTexture.free();
 
 	//Destroy window	
 	SDL_DestroyRenderer( gRenderer );
@@ -551,6 +467,14 @@ void close()
 	//Quit SDL subsystems
 	IMG_Quit();
 	SDL_Quit();
+}
+
+Uint32 callback( Uint32 interval, void* param )
+{
+	//Print callback message
+	printf( "Callback called back with message: %s\n", (char*)param );
+
+	return 0;
 }
 
 int main( int argc, char* args[] )
@@ -575,6 +499,9 @@ int main( int argc, char* args[] )
 			//Event handler
 			SDL_Event e;
 
+			//Set callback
+			SDL_TimerID timerID = SDL_AddTimer( 3 * 1000, callback, "3 seconds waited!" );
+
 			//While application is running
 			while( !quit )
 			{
@@ -592,17 +519,15 @@ int main( int argc, char* args[] )
 				SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF );
 				SDL_RenderClear( gRenderer );
 
-				//Copy frame from buffer
-				gStreamingTexture.lockTexture();
-				gStreamingTexture.copyPixels( gDataStream.getBuffer() );
-				gStreamingTexture.unlockTexture();
-
-				//Render frame
-				gStreamingTexture.render( ( SCREEN_WIDTH - gStreamingTexture.getWidth() ) / 2, ( SCREEN_HEIGHT - gStreamingTexture.getHeight() ) / 2 );
+				//Render splash
+				gSplashTexture.render( 0, 0 );
 
 				//Update screen
 				SDL_RenderPresent( gRenderer );
 			}
+
+			//Remove timer in case the call back was not called
+			SDL_RemoveTimer( timerID );
 		}
 	}
 
