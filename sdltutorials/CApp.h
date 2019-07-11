@@ -8,6 +8,13 @@ class CApp
     public:
         CApp();
         int OnExecute();
+        bool OnInit();
+        void OnEvent(SDL_Event* Event);
+        void OnLoop();
+        void OnRender();
+        void OnCleanup();
+    private:
+        bool Running;
 };
 
 #endif
