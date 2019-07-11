@@ -15,6 +15,7 @@ class CApp
         void OnCleanup();
     private:
         bool Running;
+        SDL_Surface* Surf_Display;
 };
 
 #endif
