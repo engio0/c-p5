@@ -12,6 +12,7 @@ find_package(SDL2_mixer REQUIRED)
 
 include_directories(${SDL2_INCLUDE_DIR} ${SDL2_IMAGE_INCLUDE_DIR} ${SDL2_TTF_INCLUDE_DIR} ${SDL2_MIXER_INCLUDE_PATH})
 
-add_executable(SDL2Tutorial ./CApp.cpp)
+add_executable(SDL2Tutorial ./CApp.cpp ./CApp_OnInit.cpp ./CApp_OnEvent.cpp ./CApp_OnLoop.cpp ./CApp_OnRender.cpp
+               ./CApp_OnCleanup.cpp)
 
 target_link_libraries(SDL2Tutorial ${SDL2_LIBRARY} ${SDL2_IMAGE_LIBRARY} ${SDL2_TTF_LIBRARY} ${SDL2_MIXER_LIBRARY})
