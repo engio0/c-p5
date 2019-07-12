@@ -2,6 +2,9 @@
 
 CApp::CApp()
 {
+    Win_Display = nullptr;
+    Ren_Display = nullptr;
+
     Running = true;
 }
 

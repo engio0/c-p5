@@ -2,4 +2,5 @@
 
 void CApp::OnCleanup()
 {
+    SDL_Quit();
 }
