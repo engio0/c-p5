@@ -13,7 +13,7 @@ SDL_Surface *CSurface::OnLoad(char *File)
         return nullptr;
     }
 
-    Surf_Return = SDL_DisplayFormat(Surf_Temp);
+    Surf_Return = SDL_ConvertSurfaceFormat(Surf_Temp, pixelFormat, 0);
     SDL_FreeSurface(Surf_Temp);
 
     return Surf_Return;

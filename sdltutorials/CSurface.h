@@ -9,6 +9,7 @@ class CSurface
         CSurface();
         static SDL_Surface *OnLoad(char *File);
     private:
+        static Uint32 pixelFormat;
 };
 
 #endif
