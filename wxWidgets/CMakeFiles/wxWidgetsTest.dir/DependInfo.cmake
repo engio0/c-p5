@@ -11,8 +11,9 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "D:/usr/x86_64-w64-mingw32/include/SDL2"
-  "D:/usr/x86_64-w64-mingw32/lib/mswu"
-  "D:/usr/x86_64-w64-mingw32/include"
+  "D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/mswu"
+  "D:/Dev/wxMSW-3/wxWidgets-3.0.4/include"
+  "D:/ProgramFiles/CMake/share/cmake-3.11/Modules/UsewxWidgets.cmake"
   )
 
 # Targets to which this target links.

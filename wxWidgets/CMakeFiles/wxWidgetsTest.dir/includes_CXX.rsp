@@ -1,1 +1,1 @@
--ID:/usr/x86_64-w64-mingw32/include/SDL2 -ID:/usr/x86_64-w64-mingw32/lib/mswu -ID:/usr/x86_64-w64-mingw32/include 
+-ID:/usr/x86_64-w64-mingw32/include/SDL2 -ID:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/mswu -ID:/Dev/wxMSW-3/wxWidgets-3.0.4/include -ID:/ProgramFiles/CMake/share/cmake-3.11/Modules/UsewxWidgets.cmake 

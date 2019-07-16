@@ -258,28 +258,28 @@ SDL2_TTF_INCLUDE_DIR:PATH=D:/usr/x86_64-w64-mingw32/include/SDL2
 SDL2_TTF_LIBRARY:FILEPATH=C:/Windows/System32/SDL2_ttf.dll
 
 //Cleared.
-WX_adv:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31u_adv.a
+WX_adv:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxmsw30u_adv.a
 
 //Cleared.
-WX_advd:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31ud_adv.a
+WX_advd:FILEPATH=WX_advd-NOTFOUND
 
 //Cleared.
-WX_aui:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31u_aui.a
+WX_aui:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxmsw30u_aui.a
 
 //Cleared.
-WX_auid:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31ud_aui.a
+WX_auid:FILEPATH=WX_auid-NOTFOUND
 
 //Cleared.
-WX_base:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxbase31u.a
+WX_base:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxbase30u.a
 
 //Cleared.
-WX_based:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxbase31ud.a
+WX_based:FILEPATH=WX_based-NOTFOUND
 
 //Cleared.
-WX_core:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31u_core.a
+WX_core:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxmsw30u_core.a
 
 //Cleared.
-WX_cored:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31ud_core.a
+WX_cored:FILEPATH=WX_cored-NOTFOUND
 
 //Cleared.
 WX_dbgrid:FILEPATH=WX_dbgrid-NOTFOUND
@@ -288,34 +288,34 @@ WX_dbgrid:FILEPATH=WX_dbgrid-NOTFOUND
 WX_dbgridd:FILEPATH=WX_dbgridd-NOTFOUND
 
 //Cleared.
-WX_expat:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxexpat.a
+WX_expat:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxexpat.a
 
 //Cleared.
-WX_expatd:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxexpatd.a
+WX_expatd:FILEPATH=WX_expatd-NOTFOUND
 
 //Cleared.
-WX_gl:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31u_gl.a
+WX_gl:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxmsw30u_gl.a
 
 //Cleared.
-WX_gld:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31ud_gl.a
+WX_gld:FILEPATH=WX_gld-NOTFOUND
 
 //Cleared.
-WX_html:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31u_html.a
+WX_html:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxmsw30u_html.a
 
 //Cleared.
-WX_htmld:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31ud_html.a
+WX_htmld:FILEPATH=WX_htmld-NOTFOUND
 
 //Cleared.
-WX_jpeg:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxjpeg.a
+WX_jpeg:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxjpeg.a
 
 //Cleared.
-WX_jpegd:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxjpegd.a
+WX_jpegd:FILEPATH=WX_jpegd-NOTFOUND
 
 //Cleared.
-WX_media:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31u_media.a
+WX_media:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxmsw30u_media.a
 
 //Cleared.
-WX_mediad:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31ud_media.a
+WX_mediad:FILEPATH=WX_mediad-NOTFOUND
 
 //Cleared.
 WX_mono:FILEPATH=WX_mono-NOTFOUND
@@ -324,10 +324,10 @@ WX_mono:FILEPATH=WX_mono-NOTFOUND
 WX_monod:FILEPATH=WX_monod-NOTFOUND
 
 //Cleared.
-WX_net:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxbase31u_net.a
+WX_net:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxbase30u_net.a
 
 //Cleared.
-WX_netd:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxbase31ud_net.a
+WX_netd:FILEPATH=WX_netd-NOTFOUND
 
 //Cleared.
 WX_odbc:FILEPATH=WX_odbc-NOTFOUND
@@ -336,16 +336,16 @@ WX_odbc:FILEPATH=WX_odbc-NOTFOUND
 WX_odbcd:FILEPATH=WX_odbcd-NOTFOUND
 
 //Cleared.
-WX_png:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxpng.a
+WX_png:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxpng.a
 
 //Cleared.
-WX_pngd:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxpngd.a
+WX_pngd:FILEPATH=WX_pngd-NOTFOUND
 
 //Cleared.
-WX_propgrid:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31u_propgrid.a
+WX_propgrid:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxmsw30u_propgrid.a
 
 //Cleared.
-WX_propgridd:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31ud_propgrid.a
+WX_propgridd:FILEPATH=WX_propgridd-NOTFOUND
 
 //Cleared.
 WX_qa:FILEPATH=WX_qa-NOTFOUND
@@ -354,79 +354,79 @@ WX_qa:FILEPATH=WX_qa-NOTFOUND
 WX_qad:FILEPATH=WX_qad-NOTFOUND
 
 //Cleared.
-WX_regex:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxregexu.a
+WX_regex:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxregexu.a
 
 //Cleared.
-WX_regexd:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxregexud.a
+WX_regexd:FILEPATH=WX_regexd-NOTFOUND
 
 //Cleared.
-WX_ribbon:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31u_ribbon.a
+WX_ribbon:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxmsw30u_ribbon.a
 
 //Cleared.
-WX_ribbond:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31ud_ribbon.a
+WX_ribbond:FILEPATH=WX_ribbond-NOTFOUND
 
 //Cleared.
-WX_richtext:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31u_richtext.a
+WX_richtext:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxmsw30u_richtext.a
 
 //Cleared.
-WX_richtextd:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31ud_richtext.a
+WX_richtextd:FILEPATH=WX_richtextd-NOTFOUND
 
 //Cleared.
-WX_scintilla:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxscintilla.a
+WX_scintilla:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxscintilla.a
 
 //Cleared.
-WX_scintillad:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxscintillad.a
+WX_scintillad:FILEPATH=WX_scintillad-NOTFOUND
 
 //Cleared.
-WX_stc:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31u_stc.a
+WX_stc:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxmsw30u_stc.a
 
 //Cleared.
-WX_stcd:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31ud_stc.a
+WX_stcd:FILEPATH=WX_stcd-NOTFOUND
 
 //Cleared.
-WX_tiff:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxtiff.a
+WX_tiff:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxtiff.a
 
 //Cleared.
-WX_tiffd:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxtiffd.a
+WX_tiffd:FILEPATH=WX_tiffd-NOTFOUND
 
 //Cleared.
-WX_webview:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31u_webview.a
+WX_webview:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxmsw30u_webview.a
 
 //Cleared.
-WX_webviewd:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31ud_webview.a
+WX_webviewd:FILEPATH=WX_webviewd-NOTFOUND
 
 //Cleared.
-WX_xml:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxbase31u_xml.a
+WX_xml:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxbase30u_xml.a
 
 //Cleared.
-WX_xmld:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxbase31ud_xml.a
+WX_xmld:FILEPATH=WX_xmld-NOTFOUND
 
 //Cleared.
-WX_xrc:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31u_xrc.a
+WX_xrc:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxmsw30u_xrc.a
 
 //Cleared.
-WX_xrcd:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxmsw31ud_xrc.a
+WX_xrcd:FILEPATH=WX_xrcd-NOTFOUND
 
 //Cleared.
-WX_zlib:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxzlib.a
+WX_zlib:FILEPATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxzlib.a
 
 //Cleared.
-WX_zlibd:FILEPATH=D:/usr/x86_64-w64-mingw32/lib/libwxzlibd.a
+WX_zlibd:FILEPATH=WX_zlibd-NOTFOUND
 
 //Path to a file.
 _filename:FILEPATH=D:/usr/x86_64-w64-mingw32/include/wx/version.h
 
-//Set wxWidgets configuration (mswud;mswu)
+//Set wxWidgets configuration (mswu)
 wxWidgets_CONFIGURATION:STRING=mswu
 
 //Cleared.
-wxWidgets_LIB_DIR:PATH=wxWidgets_LIB_DIR-NOTFOUND
+wxWidgets_LIB_DIR:PATH=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll
 
 //No help, variable specified on the command line.
 wxWidgets_ROOT_DIR:PATH=D:/usr/x86_64-w64-mingw32
 
-//Use release and debug configurations?
-wxWidgets_USE_REL_AND_DBG:BOOL=ON
+//No mswud found.
+wxWidgets_USE_REL_AND_DBG:BOOL=FALSE
 
 //Location of wxWidgets resource file compiler binary (wxrc)
 wxWidgets_wxrc_EXECUTABLE:FILEPATH=wxWidgets_wxrc_EXECUTABLE-NOTFOUND
@@ -603,20 +603,20 @@ FIND_PACKAGE_MESSAGE_DETAILS_SDL2_ttf:INTERNAL=[C:/Windows/System32/SDL2_ttf.dll
 //Details about finding Threads
 FIND_PACKAGE_MESSAGE_DETAILS_Threads:INTERNAL=[TRUE][v()]
 //Details about finding wxWidgets
-FIND_PACKAGE_MESSAGE_DETAILS_wxWidgets:INTERNAL=[debug;D:/usr/x86_64-w64-mingw32/lib/libwxmsw31ud_core.a;optimized;D:/usr/x86_64-w64-mingw32/lib/libwxmsw31u_core.a;debug;D:/usr/x86_64-w64-mingw32/lib/libwxbase31ud.a;optimized;D:/usr/x86_64-w64-mingw32/lib/libwxbase31u.a;debug;D:/usr/x86_64-w64-mingw32/lib/libwxpngd.a;optimized;D:/usr/x86_64-w64-mingw32/lib/libwxpng.a;debug;D:/usr/x86_64-w64-mingw32/lib/libwxtiffd.a;optimized;D:/usr/x86_64-w64-mingw32/lib/libwxtiff.a;debug;D:/usr/x86_64-w64-mingw32/lib/libwxjpegd.a;optimized;D:/usr/x86_64-w64-mingw32/lib/libwxjpeg.a;debug;D:/usr/x86_64-w64-mingw32/lib/libwxzlibd.a;optimized;D:/usr/x86_64-w64-mingw32/lib/libwxzlib.a;debug;D:/usr/x86_64-w64-mingw32/lib/libwxregexud.a;optimized;D:/usr/x86_64-w64-mingw32/lib/libwxregexu.a;debug;D:/usr/x86_64-w64-mingw32/lib/libwxexpatd.a;optimized;D:/usr/x86_64-w64-mingw32/lib/libwxexpat.a;winmm;comctl32;oleacc;rpcrt4;shlwapi;version;wsock32][D:/usr/x86_64-w64-mingw32/lib/mswu;D:/usr/x86_64-w64-mingw32/include][v3.1.2()]
+FIND_PACKAGE_MESSAGE_DETAILS_wxWidgets:INTERNAL=[D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxmsw30u_core.a;D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxbase30u.a;D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxpng.a;D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxtiff.a;D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxjpeg.a;D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxzlib.a;D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxregexu.a;D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/libwxexpat.a;winmm;comctl32;oleacc;rpcrt4;shlwapi;version;wsock32][D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll/mswu;D:/Dev/wxMSW-3/wxWidgets-3.0.4/include][v3.1.2()]
 //ADVANCED property for variable: SDL2_IMAGE_INCLUDE_DIR
 SDL2_IMAGE_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: SDL2_IMAGE_LIBRARY
 SDL2_IMAGE_LIBRARY-ADVANCED:INTERNAL=1
-SDL2_LIBRARY_TEMP:INTERNAL=mingw32;-mwindows;D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a;C:/Windows/System32/SDL2.dll
+SDL2_LIBRARY_TEMP:INTERNAL=mingw32;-mwindows;D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a;mingw32;-mwindows;D:/usr/x86_64-w64-mingw32/lib/libSDL2main.a;C:/Windows/System32/SDL2.dll
 //ADVANCED property for variable: SDL2_MIXER_INCLUDE_DIR
 SDL2_MIXER_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: SDL2_MIXER_LIBRARY
 SDL2_MIXER_LIBRARY-ADVANCED:INTERNAL=1
 //wxWidgets_LIB_DIR
-WX_LIB_DIR:INTERNAL=D:/usr/x86_64-w64-mingw32/lib
+WX_LIB_DIR:INTERNAL=D:/Dev/wxMSW-3/wxWidgets-3.0.4/lib/gcc_dll
 //wxWidgets_ROOT_DIR
-WX_ROOT_DIR:INTERNAL=D:/usr/x86_64-w64-mingw32
+WX_ROOT_DIR:INTERNAL=D:/Dev/wxMSW-3/wxWidgets-3.0.4
 //ADVANCED property for variable: WX_adv
 WX_adv-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: WX_advd
