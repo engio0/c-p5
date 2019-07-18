@@ -5,7 +5,7 @@ set(SDL2_IMAGE_PATH "D:/usr/x86_64-w64-mingw32")
 set(SDL2_TTF_PATH "D:/usr/x86_64-w64-mingw32")
 set(SDL2_MIXER_PATH "D:/usr/x86_64-w64-mingw32")
 set(wxWidgets_ROOT_DIR "D:/Dev/wxWidgets")
-set(wxWidgets_LIB_DIR "D:/Dev/wxWidgets/lib/gcc_dll/mswu")
+set(wxWidgets_LIB_DIR "D:/Dev/wxWidgets/lib/gcc_dll")
 set(wxWidgets_CONFIGURATION mswu)
 
 find_package(SDL2 REQUIRED)
