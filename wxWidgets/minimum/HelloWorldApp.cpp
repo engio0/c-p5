@@ -6,9 +6,6 @@ class HelloWorldApp : public wxApp
         virtual bool OnInit();
 };
 
-DECLARE_APP(HelloWorldApp)
-
-
 IMPLEMENT_APP(HelloWorldApp)
 
 bool HelloWorldApp::OnInit()
