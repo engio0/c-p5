@@ -9,5 +9,7 @@ find_package(wxWidgets COMPONENTS core base REQUIRED)
 include_directories(${wxWidgets_INCLUDE_DIRS} ${wxWidgets_USE_FILE})
 
 add_executable(wxWidgetsTest ./HelloWorldApp.cpp)
+add_executable(minimum ./minimal.cpp)
 
 target_link_libraries(wxWidgetsTest ${wxWidgets_LIBRARIES})
+target_link_libraries(minimum ${wxWidgets_LIBRARIES})
