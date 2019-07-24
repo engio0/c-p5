@@ -24,14 +24,14 @@ private:
 
 enum
 {
-    ID_Hello = 1
+    ID_Hello
 };
 
 wxIMPLEMENT_APP(MyApp);
 
 bool MyApp::OnInit()
 {
-    MyFrame *frame = new MyFrame();
+    MyFrame *frame = new MyFrame;
     frame->Show(true);
     return true;
 }
