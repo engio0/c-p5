@@ -66,6 +66,7 @@ public:
     // event handlers (these functions should _not_ be virtual)
     void OnQuit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
+    void OnHelpMe(wxCommandEvent& event);
 
 private:
     // any class wishing to process wxWidgets events must use this macro
@@ -85,7 +86,8 @@ enum
     // it is important for the id corresponding to the "About" command to have
     // this standard value as otherwise it won't be handled properly under Mac
     // (where it is special and put into the "Apple" menu)
-    Minimal_About = wxID_ABOUT
+    Minimal_About = wxID_ABOUT,
+    Minimal_HelpMe = wxID_HIGHEST + 1
 };
 
 // ----------------------------------------------------------------------------
@@ -98,6 +100,7 @@ enum
 wxBEGIN_EVENT_TABLE(MyFrame, wxFrame)
     EVT_MENU(Minimal_Quit,  MyFrame::OnQuit)
     EVT_MENU(Minimal_About, MyFrame::OnAbout)
+    EVT_MENU(Minimal_HelpMe, MyFrame::OnHelpMe)
 wxEND_EVENT_TABLE()
 
 // Create a new application object: this macro will allow wxWidgets to create
@@ -154,6 +157,7 @@ MyFrame::MyFrame(const wxString& title)
     // the "About" item should be in the help menu
     wxMenu *helpMenu = new wxMenu;
     helpMenu->Append(Minimal_About, "&About\tF1", "Show about dialog");
+    helpMenu->Append(Minimal_HelpMe, "Help&Me\tF2", "Show helpme dialog");
 
     fileMenu->Append(Minimal_Quit, "E&xit\tAlt-X", "Quit this program");
 
@@ -202,4 +206,14 @@ void MyFrame::OnAbout(wxCommandEvent& WXUNUSED(event))
                  "About wxWidgets minimal sample",
                  wxOK | wxICON_INFORMATION,
                  this);
+}
+
+void MyFrame::OnHelpMe(wxCommandEvent& WXUNUSED(event))
+{
+    wxMessageBox(wxString::Format
+                 (
+                    "Help me...\nOn Another Day...\n"
+                    "ID : %d", wxID_HIGHEST + 1
+                 ), "HelpMe", wxOK | wxICON_INFORMATION, this
+            );
 }
