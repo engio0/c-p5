@@ -39,6 +39,8 @@
     #include "../sample.xpm"
 #endif
 
+#include "message.h"
+
 // ----------------------------------------------------------------------------
 // private classes
 // ----------------------------------------------------------------------------
@@ -67,6 +69,8 @@ public:
     void OnQuit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
     void OnHelpMe(wxCommandEvent& event);
+    void OnSleep(wxCommandEvent& event);
+    void OnTime(wxCommandEvent& event);
 
 private:
     // any class wishing to process wxWidgets events must use this macro
@@ -87,7 +91,9 @@ enum
     // this standard value as otherwise it won't be handled properly under Mac
     // (where it is special and put into the "Apple" menu)
     Minimal_About = wxID_ABOUT,
-    Minimal_HelpMe = wxID_HIGHEST + 1
+    Minimal_HelpMe = wxID_HIGHEST + 1,
+    Minimal_Sleep = wxID_HIGHEST + 2,
+    Minimal_Time = wxID_HIGHEST + 3
 };
 
 // ----------------------------------------------------------------------------
@@ -101,6 +107,8 @@ wxBEGIN_EVENT_TABLE(MyFrame, wxFrame)
     EVT_MENU(Minimal_Quit,  MyFrame::OnQuit)
     EVT_MENU(Minimal_About, MyFrame::OnAbout)
     EVT_MENU(Minimal_HelpMe, MyFrame::OnHelpMe)
+    EVT_MENU(Minimal_Sleep, MyFrame::OnSleep)
+    EVT_MENU(Minimal_Time, MyFrame::OnTime)
 wxEND_EVENT_TABLE()
 
 // Create a new application object: this macro will allow wxWidgets to create
@@ -160,6 +168,8 @@ MyFrame::MyFrame(const wxString& title)
     helpMenu->Append(Minimal_HelpMe, "Help&Me\tF2", "Show helpme dialog");
 
     fileMenu->Append(Minimal_Quit, "E&xit\tAlt-X", "Quit this program");
+    fileMenu->Append(Minimal_Sleep, "&Sleep\tAlt-S", "Sleep for 10 seconds");
+    fileMenu->Append(Minimal_Time, "&Time\tAlt-T", "Display Current Time");
 
     // now append the freshly created menu to the menu bar...
     wxMenuBar *menuBar = new wxMenuBar();
@@ -216,4 +226,15 @@ void MyFrame::OnHelpMe(wxCommandEvent& WXUNUSED(event))
                     "ID : %d", wxID_HIGHEST + 1
                  ), "HelpMe", wxOK | wxICON_INFORMATION, this
             );
+}
+
+void MyFrame::OnSleep(wxCommandEvent& WXUNUSED(event))
+{
+    wxThread::Sleep(6000);
+}
+
+void MyFrame::OnTime(wxCommandEvent& WXUNUSED(event))
+{
+    wxString strTime = GetTimeAsString();
+    wxMessageBox(wxString::Format("Current Time : %s", strTime), "Current Time", wxOK, this);
 }
