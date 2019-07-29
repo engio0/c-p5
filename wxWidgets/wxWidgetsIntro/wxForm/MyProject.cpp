@@ -13,33 +13,33 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 {
 	this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 
-	m_menubar1 = new wxMenuBar( 0 );
-	m_menu1 = new wxMenu();
-	wxMenuItem* m_menuItem1;
-	m_menuItem1 = new wxMenuItem( m_menu1, wxID_ANY, wxString( wxT("Exit") ) , wxEmptyString, wxITEM_NORMAL );
-	m_menu1->Append( m_menuItem1 );
+	menubarMain = new wxMenuBar( 0 );
+	menuFile = new wxMenu();
+	wxMenuItem* menuItemExit;
+	menuItemExit = new wxMenuItem( menuFile, wxID_ANY, wxString( wxT("Exit") ) , wxEmptyString, wxITEM_NORMAL );
+	menuFile->Append( menuItemExit );
 
-	wxMenuItem* m_menuItem2;
-	m_menuItem2 = new wxMenuItem( m_menu1, wxID_ANY, wxString( wxT("Open") ) , wxEmptyString, wxITEM_NORMAL );
-	m_menu1->Append( m_menuItem2 );
+	wxMenuItem* menuItemOpen;
+	menuItemOpen = new wxMenuItem( menuFile, wxID_ANY, wxString( wxT("Open") ) , wxEmptyString, wxITEM_NORMAL );
+	menuFile->Append( menuItemOpen );
 
-	m_menubar1->Append( m_menu1, wxT("File") );
+	menubarMain->Append( menuFile, wxT("File") );
 
-	m_menu2 = new wxMenu();
-	wxMenuItem* m_menuItem3;
-	m_menuItem3 = new wxMenuItem( m_menu2, wxID_ANY, wxString( wxT("Get") ) , wxEmptyString, wxITEM_NORMAL );
-	m_menu2->Append( m_menuItem3 );
+	menuEdit = new wxMenu();
+	wxMenuItem* menuItemGet;
+	menuItemGet = new wxMenuItem( menuEdit, wxID_ANY, wxString( wxT("Get") ) , wxEmptyString, wxITEM_NORMAL );
+	menuEdit->Append( menuItemGet );
 
-	m_menubar1->Append( m_menu2, wxT("Edit") );
+	menubarMain->Append( menuEdit, wxT("Edit") );
 
-	m_menu3 = new wxMenu();
-	wxMenuItem* m_menuItem4;
-	m_menuItem4 = new wxMenuItem( m_menu3, wxID_ANY, wxString( wxT("About") ) , wxEmptyString, wxITEM_NORMAL );
-	m_menu3->Append( m_menuItem4 );
+	menuHelp = new wxMenu();
+	wxMenuItem* menuItemAbout;
+	menuItemAbout = new wxMenuItem( menuHelp, wxID_ANY, wxString( wxT("About") ) , wxEmptyString, wxITEM_NORMAL );
+	menuHelp->Append( menuItemAbout );
 
-	m_menubar1->Append( m_menu3, wxT("Help") );
+	menubarMain->Append( menuHelp, wxT("Help") );
 
-	this->SetMenuBar( m_menubar1 );
+	this->SetMenuBar( menubarMain );
 
 
 	this->Centre( wxBOTH );

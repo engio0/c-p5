@@ -31,10 +31,10 @@ class MyFrame : public wxFrame
 	private:
 
 	protected:
-		wxMenuBar* m_menubar1;
-		wxMenu* m_menu1;
-		wxMenu* m_menu2;
-		wxMenu* m_menu3;
+		wxMenuBar* menubarMain;
+		wxMenu* menuFile;
+		wxMenu* menuEdit;
+		wxMenu* menuHelp;
 
 	public:
 
