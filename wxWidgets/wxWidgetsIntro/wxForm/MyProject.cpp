@@ -43,8 +43,16 @@ MyFrame::MyFrame( wxWindow* parent, wxWindowID id, const wxString& title, const 
 
 
 	this->Centre( wxBOTH );
+
+	// Connect Events
+	menuFile->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MyFrame::OnExit ), this, menuItemExit->GetId());
+	menuFile->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MyFrame::OnOpen ), this, menuItemOpen->GetId());
+	menuEdit->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MyFrame::OnGet ), this, menuItemGet->GetId());
+	menuHelp->Bind(wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( MyFrame::OnAbout ), this, menuItemAbout->GetId());
 }
 
 MyFrame::~MyFrame()
 {
+	// Disconnect Events
+
 }
