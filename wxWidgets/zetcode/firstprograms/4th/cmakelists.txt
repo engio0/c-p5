@@ -1,4 +1,8 @@
+project(wxWidget_Tutorial)
 cmake_minimum_required(VERSION 3.8)
+
+set(CMAKE_SOURCE_DIR ".")
+set(CMAKE_BINARY_DIR ".")
 
 set(wxWidgets_ROOT_DIR "D:/Dev/wxWidgets")
 set(wxWidgets_LIB_DIR "D:/Dev/wxWidgets/lib/gcc_dll")
