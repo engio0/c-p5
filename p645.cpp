@@ -4,6 +4,7 @@
 
 class Message {
     friend class Folder;
+    friend void swap(Message &, Message &);
 
 public:
     explicit Message(const std::string &str = ""):contents(str) {}
@@ -77,4 +78,18 @@ Message& Message::operator=(const Message& rhs)
     folders = rhs.folders;
     add_to_Folders(rhs);
     return *this;
+}
+
+void swap(Message &lhs, Message &rhs)
+{
+    for (auto f : lhs.folders)
+        f->remMsg(&lhs);
+    for (auto f : rhs.folders)
+        f->remMsg(&rhs);
+    std::swap(lhs.folders, rhs.folders);
+    std::swap(lhs.contents, rhs.contents);
+    for (auto f : lhs.folders)
+        f->addMsg(&lhs);
+    for (auto f : rhs.folders)
+        f->addMsg(&rhs);
 }
