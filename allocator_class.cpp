@@ -53,6 +53,7 @@ public:
     size_t capacity() const { return cap - elements; }
     std::string* begin() const { return elements; }
     std::string* end() const { return first_free; };
+private:
 };
 
 int main()
