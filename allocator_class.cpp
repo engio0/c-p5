@@ -60,6 +60,18 @@ private:
     std::pair<std::string*, std::string*> alloc_n_copy(const std::string*, const std::string*);
 };
 
+void StrVec::push_back(const std::string& str)
+{
+    chk_n_alloc();
+    alloc.construct(first_free++, str);
+}
+
+std::pair<std::string*, std::string*> StrVec::alloc_n_copy(const std::string* b, const std::string* e)
+{
+    auto data = alloc.allocate(e-b);
+    return {data, uninitialized_copy(b, e, data)};
+}
+
 int main()
 {
     p602();
