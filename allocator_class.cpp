@@ -54,6 +54,10 @@ public:
     std::string* begin() const { return elements; }
     std::string* end() const { return first_free; };
 private:
+    void reallocate();
+    void free();
+    void chk_n_alloc() { if (size() == capacity()) reallocate(); }
+    std::pair<std::string*, std::string*> alloc_n_copy(const std::string*, const std::string*);
 };
 
 int main()
