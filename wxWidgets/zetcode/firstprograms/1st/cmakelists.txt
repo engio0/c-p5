@@ -1,13 +1,16 @@
+project(myFirstProject)
 cmake_minimum_required(VERSION 3.8)
 
-set(wxWidgets_ROOT_DIR "D:/Dev/wxWidgets")
-set(wxWidgets_LIB_DIR "D:/Dev/wxWidgets/lib/gcc_dll")
 set(wxWidgets_CONFIGURATION mswu)
+set(wxWidgets_ROOT_DIR "D:/Dev/wxWidgets-3.1.4")
+set(wxWidgets_INCLUDE_DIRS "D:/Dev/wxWidgets-3.1.4/include")
+set(wxWidgets_LIB_DIR "D:/Dev/wxWidgets-3.1.4/lib/gcc810_x64_dll")
+set(wxWidgets_LIBRARIES "D:/Dev/wxWidgets-3.1.4/lib/gcc810_x64_dll")
+# set(wxWidgets_EXCLUDE_COMMON_LIBRARIES TRUE)
 
 find_package(wxWidgets COMPONENTS core base REQUIRED)
-
-include_directories(${wxWidgets_INCLUDE_DIRS})
+include(${wxWidgets_USE_FILE})
 
 add_executable(wxWidgetsTest WIN32 ./main.cpp ./simple.cpp)
 
-target_link_libraries(wxWidgetsTest ${wxWidgets_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES})
